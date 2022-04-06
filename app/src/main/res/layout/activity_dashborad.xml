@@ -165,6 +165,7 @@
             android:layout_marginEnd="@dimen/_15sdp">
 
             <TextView
+                android:id="@+id/tvDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -176,6 +177,7 @@
                 android:textSize="@dimen/_13sdp" />
 
             <TextView
+                android:id="@+id/tvTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -185,7 +187,8 @@
                 android:gravity="center_vertical"
                 android:text="1453 Total"
                 android:textColor="@color/gray_light"
-                android:textSize="@dimen/_13sdp" />
+                android:textSize="@dimen/_13sdp"
+                android:visibility="gone"/>
 
 
 
@@ -208,7 +211,8 @@
             android:layout_marginStart="@dimen/_18sdp"
             android:layout_marginEnd="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:weightSum=" 1">
+            android:weightSum=" 1"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="0dp"
@@ -266,7 +270,8 @@
             android:layout_height="@dimen/_30sdp"
             android:layout_marginStart="@dimen/_18sdp"
             android:layout_marginEnd="@dimen/_15sdp"
-            android:weightSum=" 1">
+            android:weightSum=" 1"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="0dp"
@@ -325,7 +330,8 @@
             android:layout_marginStart="@dimen/_18sdp"
             android:layout_marginEnd="@dimen/_15sdp"
             android:layout_marginBottom="@dimen/_10sdp"
-            android:weightSum=" 1">
+            android:weightSum=" 1"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="0dp"
@@ -377,6 +383,81 @@
 
 
         </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/layoutChart"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_90sdp"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:visibility="gone">
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".25"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="@string/checked"
+                    android:fontFamily="@font/poppins_bold"
+                    android:layout_marginTop="@dimen/_11sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:textSize="@dimen/_11sdp"
+                    android:textColor="@color/gray_light"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="@string/scraped"
+                    android:fontFamily="@font/poppins_bold"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:textSize="@dimen/_11sdp"
+                    android:textColor="@color/gray_light"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="@string/repair"
+                    android:fontFamily="@font/poppins_bold"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:textSize="@dimen/_11sdp"
+                    android:textColor="@color/gray_light"/>
+
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".75">
+
+                <com.github.mikephil.charting.charts.HorizontalBarChart
+                    android:id="@+id/chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
 
 
 

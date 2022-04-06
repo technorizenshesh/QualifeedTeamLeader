@@ -4,10 +4,12 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
 
         <LinearLayout
+            android:id="@+id/layoutOne"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_60sdp"
             android:layout_marginStart="@dimen/_15sdp"
@@ -35,6 +37,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tvChecked"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -81,6 +84,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tvRepair"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -112,6 +116,7 @@
 
 
         <LinearLayout
+            android:id="@+id/layoutTwo"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_60sdp"
             android:layout_marginStart="@dimen/_15sdp"
@@ -138,6 +143,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tvScrap"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -184,6 +190,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tvBlocked"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -212,6 +219,20 @@
 
 
         </LinearLayout>
+
+
+
+        <TextView
+            android:id="@+id/tvNotFound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Not available"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="@dimen/_12sdp"
+            android:visibility="gone"
+            />
 
 
     </LinearLayout>

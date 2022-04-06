@@ -9,7 +9,9 @@ package com.qualifeed.teamleader.retrofit;
 
 
 
+import com.qualifeed.teamleader.model.DashBoradModel;
 import com.qualifeed.teamleader.model.LoginModel;
+import com.qualifeed.teamleader.model.ProductTypeModel;
 
 import java.util.Map;
 
@@ -35,6 +37,11 @@ public interface TeamLeadInterface {
     Call<Map<String, String>> forgotPassword(@FieldMap Map<String, String> params);
 
 
+    @GET("get_product_type_team")
+    Call<ProductTypeModel> getProductType();
 
+    @FormUrlEncoded
+    @POST("get_all_product_type_team")
+    Call<DashBoradModel> getDashData(@FieldMap Map<String, String> params);
 
 }

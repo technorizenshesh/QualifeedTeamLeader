@@ -5,6 +5,7 @@ import static java.util.Calendar.MONTH;
 import static java.util.Calendar.YEAR;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -24,15 +25,18 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.DatePicker;
 import android.widget.TextView;
 
 import androidx.loader.content.CursorLoader;
 
 import com.google.gson.Gson;
 
+import com.qualifeed.teamleader.DashboardAct;
 import com.qualifeed.teamleader.R;
 import com.qualifeed.teamleader.model.LoginModel;
 import com.qualifeed.teamleader.retrofit.Constant;
+import com.qualifeed.teamleader.retrofit.DateSetListener;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -210,6 +214,30 @@ public class DataManager {
     }
 
 
+    public static String convertDateToString3(String date1) {
+        String str = "";
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date dt = format.parse(date1);
+            str = dateFormat.format(dt);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+       /* Date date = new Date(l);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
+        str = dateFormat.format(date);*/
+        Log.e("DateTime====",str);
+        return str;
+    }
+
+
+
     public static String convertStringToTime(String date1){
         String str = "";
 
@@ -266,14 +294,14 @@ public class DataManager {
 */
 
         public static String getCurrent() {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd  hh:mm:ss");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-ddy  hh:mm:ss");
             String currentDateandTime = sdf.format(new Date());
             return currentDateandTime;
         }
 
 
     public static String getCurrent1() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String currentDateandTime = sdf.format(new Date());
         return currentDateandTime;
     }
@@ -386,7 +414,7 @@ public class DataManager {
 
 
 
-    /*public static void DatePicker(Context context, final DateSetListener listener) {
+    public static void DatePicker(Context context, final DateSetListener listener) {
         final Calendar myCalendar = Calendar.getInstance();
 
         DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -396,22 +424,22 @@ public class DataManager {
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                String myFormat = "dd-MM-yyyy"; // your format yyyy-MM-dd"
+                String myFormat = "yyyy-MM-dd"; // your format "  dd-MM-yyyy
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
                 listener.SelectedDate(sdf.format(myCalendar.getTime()));
-                ReservationActivity.date = sdf.format(myCalendar.getTime());
+              //  DashboardAct.date = sdf.format(myCalendar.getTime());
             }
 
         };
         DatePickerDialog datePickerDialog= new DatePickerDialog(context, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.getDatePicker().setMinDate(myCalendar.getTimeInMillis());
-        datePickerDialog.getDatePicker().setMaxDate(myCalendar.getTimeInMillis()+ (1000*60*60*24*2));
+       // datePickerDialog.getDatePicker().setMaxDate(myCalendar.getTimeInMillis()+ (1000*60*60*24*2));
 
         datePickerDialog.show();
     }
 
 
-    public static void TimePicker(Context context, final DateSetListener listene) {
+  /*  public static void TimePicker(Context context, final DateSetListener listene) {
         Calendar mcurrentTime = Calendar.getInstance();
         int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
         int minute = mcurrentTime.get(Calendar.MINUTE);
