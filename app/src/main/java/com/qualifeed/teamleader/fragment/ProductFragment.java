@@ -1,5 +1,6 @@
 package com.qualifeed.teamleader.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,8 +14,11 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
+import com.qualifeed.teamleader.BlockedAct;
 import com.qualifeed.teamleader.DashboardAct;
 import com.qualifeed.teamleader.R;
+import com.qualifeed.teamleader.RepairListAct;
+import com.qualifeed.teamleader.ScrapListAct;
 import com.qualifeed.teamleader.databinding.FragmentProductBinding;
 import com.qualifeed.teamleader.model.DashBoradModel;
 import com.qualifeed.teamleader.retrofit.ApiClient;
@@ -49,6 +53,14 @@ public class ProductFragment extends Fragment {
 
         if(NetworkAvailablity.checkNetworkStatus(getActivity())) getDashBoradData("","");
          else Toast.makeText(getActivity(), getString(R.string.network_failure), Toast.LENGTH_SHORT).show();
+
+         binding.layoutBlock.setOnClickListener(v -> startActivity(new Intent(getActivity(), BlockedAct.class)));
+
+         binding.layoutScrap.setOnClickListener(v -> startActivity(new Intent(getActivity(), ScrapListAct.class)));
+
+         binding.layoutRepair.setOnClickListener(v -> startActivity(new Intent(getActivity(), RepairListAct.class)));
+
+
     }
 
     private void getDashBoradData(String productTypeId, String date) {

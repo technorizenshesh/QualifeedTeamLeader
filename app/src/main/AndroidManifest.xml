@@ -43,6 +43,20 @@
             android:theme="@style/AppTheme.NoActionBar"/>
 
 
+        <activity android:name=".BlockedAct"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+
+        <activity android:name=".RepairListAct"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity android:name=".ScrapListAct"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+
     </application>
 
 </manifest>

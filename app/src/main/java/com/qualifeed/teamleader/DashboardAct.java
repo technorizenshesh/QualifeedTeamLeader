@@ -2,6 +2,7 @@ package com.qualifeed.teamleader;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -109,6 +110,14 @@ public class DashboardAct extends AppCompatActivity {
             DatePicker(DashboardAct.this);
 
         });
+
+
+
+       // binding.tvBlocked.setOnClickListener(v -> startActivity(new Intent(DashboardAct.this, BlockedAct.class)));
+
+        binding.tvScrap.setOnClickListener(v -> startActivity(new Intent(DashboardAct.this, ScrapListAct.class)));
+
+        binding.tvRepair.setOnClickListener(v -> startActivity(new Intent(DashboardAct.this, RepairListAct.class)));
 
 
     }

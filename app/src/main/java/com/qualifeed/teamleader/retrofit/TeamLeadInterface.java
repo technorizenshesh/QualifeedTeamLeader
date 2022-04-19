@@ -9,9 +9,13 @@ package com.qualifeed.teamleader.retrofit;
 
 
 
+import com.qualifeed.teamleader.model.BlockedModel;
 import com.qualifeed.teamleader.model.DashBoradModel;
+import com.qualifeed.teamleader.model.DefectModel;
 import com.qualifeed.teamleader.model.LoginModel;
 import com.qualifeed.teamleader.model.ProductTypeModel;
+import com.qualifeed.teamleader.model.RepairModel;
+import com.qualifeed.teamleader.model.ScrapModel;
 
 import java.util.Map;
 
@@ -43,5 +47,19 @@ public interface TeamLeadInterface {
     @FormUrlEncoded
     @POST("get_all_product_type_team")
     Call<DashBoradModel> getDashData(@FieldMap Map<String, String> params);
+
+    @GET("get_all_scrap_team")
+    Call<ScrapModel> getAllScrap();
+
+    @GET("get_all_product_repair_team")
+    Call<RepairModel> getAllRepair();
+
+
+    @GET("get_all_suspect_defect_team")
+    Call<DefectModel> getAllDefect();
+
+
+    @GET("get_all_blocked_list_team")
+    Call<BlockedModel> getAllBlocked();
 
 }

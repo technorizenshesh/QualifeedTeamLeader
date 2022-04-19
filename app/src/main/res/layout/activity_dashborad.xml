@@ -413,6 +413,7 @@
 
 
                 <TextView
+                    android:id="@+id/tvScrap"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -425,6 +426,7 @@
 
 
                 <TextView
+                    android:id="@+id/tvRepair"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"

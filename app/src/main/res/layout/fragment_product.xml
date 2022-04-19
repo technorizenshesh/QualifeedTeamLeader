@@ -66,6 +66,7 @@
 
 
             <LinearLayout
+                android:id="@+id/layoutRepair"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight=".5"
@@ -125,6 +126,7 @@
             android:weightSum="1">
 
             <LinearLayout
+                android:id="@+id/layoutScrap"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight=".5"
@@ -172,6 +174,7 @@
 
 
             <LinearLayout
+                android:id="@+id/layoutBlock"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight=".5"

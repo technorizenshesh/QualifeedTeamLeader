@@ -22,6 +22,9 @@
     <string name="scraped">Scraped</string>
     <string name="blocked">Blocked</string>
     <string name="logout">Logout</string>
+    <string name="suspect_defect">Suspect Defect</string>
+    <string name="repaired_piece">Repaired Piece</string>
+    <string name="scrap">Scrap</string>
 
 
 </resources>
