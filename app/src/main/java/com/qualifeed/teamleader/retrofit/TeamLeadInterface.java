@@ -62,4 +62,15 @@ public interface TeamLeadInterface {
     @GET("get_all_blocked_list_team")
     Call<BlockedModel> getAllBlocked();
 
+    @Multipart
+    @POST("add_defact_problem_team")
+    Call<Map<String,String>> addNewDefect(
+            @Part("team_leader_id") RequestBody team_leader_id,
+            @Part("product_id") RequestBody product_id,
+            @Part("description") RequestBody description,
+            @Part("defect_id") RequestBody defect_id,
+            @Part("save_defect") RequestBody save_defect,
+            @Part MultipartBody.Part file);
+
+
 }

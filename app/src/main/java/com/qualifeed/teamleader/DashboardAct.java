@@ -1,10 +1,15 @@
 package com.qualifeed.teamleader;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,8 +18,12 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
 
+import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -32,6 +41,7 @@ import com.qualifeed.teamleader.utils.DataManager;
 import com.qualifeed.teamleader.utils.NetworkAvailablity;
 import com.qualifeed.teamleader.utils.SessionManager;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -50,6 +60,10 @@ public class DashboardAct extends AppCompatActivity {
     ArrayList<ProductTypeModel.Result>arrayList;
     TeamLeadInterface apiInterface;
     String productTypeId="",date="";
+    String str_image_path = "";
+    private static final int REQUEST_CAMERA = 1;
+    private static final int MY_PERMISSION_CONSTANT = 5;
+    private Uri uriSavedImage;
 
 
     @Override
@@ -66,6 +80,13 @@ public class DashboardAct extends AppCompatActivity {
         date = DataManager.getCurrent1();
         binding.tvDate.setText(DataManager.convertDateToString3(date));
         binding.btnLogout.setOnClickListener(v -> SessionManager.clearsession(DashboardAct.this));
+
+
+        binding.layoutDefect.setOnClickListener(v -> {
+            if(checkPermisssionForReadStorage())
+                openCamera();
+        });
+
 
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Product"));
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Defect"));
@@ -284,6 +305,131 @@ public class DashboardAct extends AppCompatActivity {
 
         datePickerDialog.show();
     }
+
+
+
+
+    private void openCamera() {
+
+        File dirtostoreFile = new File(Environment.getExternalStorageDirectory() + "/QualifeedTeamLeader/Images/");
+
+        if (!dirtostoreFile.exists()) {
+            dirtostoreFile.mkdirs();
+        }
+
+        String timestr = DataManager.getInstance().convertDateToString(Calendar.getInstance().getTimeInMillis());
+
+        File tostoreFile = new File(Environment.getExternalStorageDirectory() + "/QualifeedTeamLeader/Images/" + "IMG_" + timestr + ".jpg");
+
+        str_image_path = tostoreFile.getPath();
+
+        uriSavedImage = FileProvider.getUriForFile(DashboardAct.this,
+                BuildConfig.APPLICATION_ID + ".provider",
+                tostoreFile);
+
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
+
+        startActivityForResult(intent, REQUEST_CAMERA);
+
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            Log.e("Result_code", requestCode + "");
+            if (requestCode == REQUEST_CAMERA) {
+                startActivity(new Intent(DashboardAct.this,NewDefectAct.class)
+                .putExtra("defect_image",str_image_path));
+
+            }
+
+       }
+    }
+
+
+    //CHECKING FOR Camera STATUS
+    public boolean checkPermisssionForReadStorage() {
+        if (ContextCompat.checkSelfPermission(DashboardAct.this,
+                Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED
+
+                ||
+
+                ContextCompat.checkSelfPermission(DashboardAct.this,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED
+                ||
+
+                ContextCompat.checkSelfPermission(DashboardAct.this,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED
+        ) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(DashboardAct.this,
+                    Manifest.permission.CAMERA)
+
+                    ||
+
+                    ActivityCompat.shouldShowRequestPermissionRationale(DashboardAct.this,
+                            Manifest.permission.READ_EXTERNAL_STORAGE)
+                    ||
+                    ActivityCompat.shouldShowRequestPermissionRationale(DashboardAct.this,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
+
+            ) {
+
+
+                ActivityCompat.requestPermissions(DashboardAct.this,
+                        new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        MY_PERMISSION_CONSTANT);
+
+            } else {
+
+                //explain("Please Allow Location Permission");
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(DashboardAct.this,
+                        new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        MY_PERMISSION_CONSTANT);
+            }
+            return false;
+        } else {
+
+            //  explain("Please Allow Location Permission");
+            return true;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case MY_PERMISSION_CONSTANT: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0) {
+                    boolean camera = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    boolean read_external_storage = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+                    boolean write_external_storage = grantResults[2] == PackageManager.PERMISSION_GRANTED;
+                    if (camera && read_external_storage && write_external_storage) {
+                        openCamera();
+                    } else {
+                        Toast.makeText(DashboardAct.this, " permission denied, boo! Disable the functionality that depends on this permission.", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(DashboardAct.this, "  permission denied, boo! Disable the functionality that depends on this permission.", Toast.LENGTH_SHORT).show();
+                }
+                // return;
+            }
+
+
+        }
+    }
+
 
 
 
