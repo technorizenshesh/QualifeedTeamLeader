@@ -76,6 +76,26 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
 
+        <activity
+            android:name=".TeamListAct"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+
+        <activity
+            android:name=".WorkerProfileAct"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+
+
+        <activity
+            android:name=".CommunicationAct"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.qualifeed.teamleader.provider"

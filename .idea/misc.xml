@@ -9,22 +9,29 @@
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/drawable/circle_yellow_bg.xml" value="0.18177083333333333" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/activity_blocked.xml" value="0.1" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/activity_blocked_details.xml" value="0.153125" />
+        <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/activity_communication.xml" value="0.153125" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/activity_dashborad.xml" value="0.165625" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/activity_new_defect.xml" value="0.1" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/activity_repair.xml" value="0.153125" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/activity_scrap.xml" value="0.153125" />
+        <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/activity_team_list.xml" value="0.153125" />
+        <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/activity_worker_profile.xml" value="0.153125" />
+        <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/dialog_block_unblock.xml" value="0.153125" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/dialog_loading.xml" value="0.165625" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/fragment_blocked.xml" value="0.20416666666666666" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/fragment_defect.xml" value="0.165625" />
+        <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/fragment_inbox.xml" value="0.153125" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/fragment_product.xml" value="0.165625" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/fragment_suspect.xml" value="0.20416666666666666" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/fragment_timer.xml" value="0.165625" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/item_blocked.xml" value="0.153125" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/item_defect.xml" value="0.14" />
+        <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/item_inbox.xml" value="0.153125" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/item_repair.xml" value="0.153125" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/item_scrap.xml" value="0.153125" />
+        <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/item_team.xml" value="0.153125" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/item_type.xml" value="0.20416666666666666" />
       </map>
     </option>

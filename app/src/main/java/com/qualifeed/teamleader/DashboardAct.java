@@ -140,6 +140,9 @@ public class DashboardAct extends AppCompatActivity {
 
         binding.tvRepair.setOnClickListener(v -> startActivity(new Intent(DashboardAct.this, RepairListAct.class)));
 
+        binding.layoutTeam.setOnClickListener(v -> startActivity(new Intent(DashboardAct.this, TeamListAct.class)));
+
+        binding.layoutCommunication.setOnClickListener(v -> startActivity(new Intent(DashboardAct.this, CommunicationAct.class)));
 
     }
 

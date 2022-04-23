@@ -12,10 +12,14 @@ package com.qualifeed.teamleader.retrofit;
 import com.qualifeed.teamleader.model.BlockedModel;
 import com.qualifeed.teamleader.model.DashBoradModel;
 import com.qualifeed.teamleader.model.DefectModel;
+import com.qualifeed.teamleader.model.InboxModel;
 import com.qualifeed.teamleader.model.LoginModel;
 import com.qualifeed.teamleader.model.ProductTypeModel;
 import com.qualifeed.teamleader.model.RepairModel;
 import com.qualifeed.teamleader.model.ScrapModel;
+import com.qualifeed.teamleader.model.SentModel;
+import com.qualifeed.teamleader.model.TeamModel;
+import com.qualifeed.teamleader.model.WorkerModel;
 
 import java.util.Map;
 
@@ -71,6 +75,32 @@ public interface TeamLeadInterface {
             @Part("defect_id") RequestBody defect_id,
             @Part("save_defect") RequestBody save_defect,
             @Part MultipartBody.Part file);
+
+
+
+    @FormUrlEncoded
+    @POST("worker_block_unblock")
+    Call<TeamModel> getAllTeam(@FieldMap Map<String, String> params);
+
+
+
+    @FormUrlEncoded
+    @POST("add_block_unblock")
+    Call<Map<String,String>> blockWorker(@FieldMap Map<String, String> params);
+
+
+    @FormUrlEncoded
+    @POST("get_worker_profile")
+    Call<WorkerModel> getWorkerDetail(@FieldMap Map<String, String> params);
+
+
+    @FormUrlEncoded
+    @POST("inbox_email")
+    Call<InboxModel> getAllInboxMail(@FieldMap Map<String, String> params);
+
+    @FormUrlEncoded
+    @POST("send_email")
+    Call<SentModel> getAllSentMail(@FieldMap Map<String, String> params);
 
 
 }
