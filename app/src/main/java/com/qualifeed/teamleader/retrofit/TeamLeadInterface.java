@@ -11,6 +11,7 @@ package com.qualifeed.teamleader.retrofit;
 
 import com.qualifeed.teamleader.model.BlockedModel;
 import com.qualifeed.teamleader.model.DashBoradModel;
+import com.qualifeed.teamleader.model.DefectListModel;
 import com.qualifeed.teamleader.model.DefectModel;
 import com.qualifeed.teamleader.model.InboxModel;
 import com.qualifeed.teamleader.model.LoginModel;
@@ -18,13 +19,16 @@ import com.qualifeed.teamleader.model.ProductTypeModel;
 import com.qualifeed.teamleader.model.RepairModel;
 import com.qualifeed.teamleader.model.ScrapModel;
 import com.qualifeed.teamleader.model.SentModel;
+import com.qualifeed.teamleader.model.TeamListModel;
 import com.qualifeed.teamleader.model.TeamModel;
+import com.qualifeed.teamleader.model.TimerModel;
 import com.qualifeed.teamleader.model.WorkerModel;
 
 import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
@@ -101,6 +105,21 @@ public interface TeamLeadInterface {
     @FormUrlEncoded
     @POST("send_email")
     Call<SentModel> getAllSentMail(@FieldMap Map<String, String> params);
+
+
+    @FormUrlEncoded
+    @POST("product_defects_count")
+    Call<DefectListModel> getDefectList(@FieldMap Map<String, String> params);
+
+    @FormUrlEncoded
+    @POST("get_team")
+    Call<TeamListModel> getTeamListApiCall(@FieldMap Map<String, String> params);
+
+    @FormUrlEncoded
+    @POST("get_teamleade")
+    Call<TimerModel> timerApiCall(@FieldMap Map<String, String> params);
+
+
 
 
 }

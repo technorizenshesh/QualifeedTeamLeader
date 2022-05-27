@@ -37,5 +37,9 @@
 
     <string name="do_you_wanna_unblock_this_profile">Do you wanna UNBLOCK this profile</string>
     <string name="data_not_available">Not available</string>
+    <string name="shift">Shift :</string>
+    <string name="control_session">Control Session</string>
+    <string name="repair_time">Repair Time</string>
+    <string name="total_session">"Total Session : "</string>
 
 </resources>
