@@ -1,6 +1,7 @@
 package com.qualifeed.teamleader.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.qualifeed.teamleader.R;
+import com.qualifeed.teamleader.SuspectDetailsAct;
 import com.qualifeed.teamleader.databinding.ItemDefectBinding;
 import com.qualifeed.teamleader.model.DefectModel;
 import com.qualifeed.teamleader.model.RepairModel;
@@ -49,6 +51,11 @@ public class SuspectAdapter extends RecyclerView.Adapter<SuspectAdapter.MyViewHo
         public MyViewHolder(@NonNull ItemDefectBinding itemView) {
             super(itemView.getRoot());
             binding = itemView;
+
+            binding.layoutMain.setOnClickListener(v -> {
+                context.startActivity(new Intent(context, SuspectDetailsAct.class)
+                .putExtra("suspect_defect",arrayList.get(getAdapterPosition())));
+            });
         }
     }
 }

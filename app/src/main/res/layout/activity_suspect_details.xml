@@ -90,30 +90,30 @@
 
 
 
-              <RelativeLayout
-                  android:layout_width="wrap_content"
-                  android:layout_height="@dimen/_40sdp"
-                  android:layout_alignParentRight="true"
-                  android:layout_alignParentBottom="true"
-                  android:layout_marginRight="@dimen/_20sdp">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="@dimen/_20sdp">
 
-                  <ImageView
-                      android:id="@+id/ivAccept"
-                      android:layout_width="@dimen/_25sdp"
-                      android:layout_height="@dimen/_25sdp"
-                      android:layout_alignParentRight="true"
-                      android:src="@drawable/ic_accept" />
+            <ImageView
+                android:id="@+id/ivAccept"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_accept"/>
 
 
-                  <ImageView
-                      android:id="@+id/ivCancel"
-                      android:layout_width="@dimen/_25sdp"
-                      android:layout_height="@dimen/_25sdp"
-                      android:layout_marginRight="@dimen/_10sdp"
-                      android:layout_toLeftOf="@+id/ivAccept"
-                      android:src="@drawable/ic_cancel" />
+            <ImageView
+                android:id="@+id/ivCancel"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_toLeftOf="@+id/ivAccept"
+                android:src="@drawable/ic_cancel" />
 
-              </RelativeLayout>
+        </RelativeLayout>
 
 
     </RelativeLayout>

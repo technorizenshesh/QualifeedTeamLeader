@@ -1,6 +1,7 @@
 package com.qualifeed.teamleader.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -8,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.qualifeed.teamleader.BlockedDetailAct;
 import com.qualifeed.teamleader.R;
 import com.qualifeed.teamleader.databinding.ItemBlockedBinding;
 import com.qualifeed.teamleader.databinding.ItemDefectBinding;
@@ -49,6 +51,11 @@ public class BlockedAdapter extends RecyclerView.Adapter<BlockedAdapter.MyViewHo
         public MyViewHolder(@NonNull ItemBlockedBinding itemView) {
             super(itemView.getRoot());
             binding = itemView;
+
+            binding.layoutMain.setOnClickListener(v -> {
+                context.startActivity(new Intent(context, BlockedDetailAct.class)
+                .putExtra("block_defect",arrayList.get(getAdapterPosition())));
+            });
         }
     }
 }

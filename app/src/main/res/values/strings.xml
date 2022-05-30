@@ -41,5 +41,6 @@
     <string name="control_session">Control Session</string>
     <string name="repair_time">Repair Time</string>
     <string name="total_session">"Total Session : "</string>
+    <string name="defect_discription">Defect Discription</string>
 
 </resources>

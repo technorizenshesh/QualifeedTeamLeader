@@ -119,7 +119,14 @@ public interface TeamLeadInterface {
     @POST("get_teamleade")
     Call<TimerModel> timerApiCall(@FieldMap Map<String, String> params);
 
+    @FormUrlEncoded
+    @POST("suspect_defect_to_product_defect")
+    Call<ResponseBody> addSuspectDefectApiCall(@FieldMap Map<String, String> params);
 
+
+    @FormUrlEncoded
+    @POST("blocked_to_product_defect")
+    Call<ResponseBody> addBlockDefectApiCall(@FieldMap Map<String, String> params);
 
 
 }

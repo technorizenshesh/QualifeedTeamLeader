@@ -1,10 +1,11 @@
 package com.qualifeed.teamleader.model;
 
+import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class DefectModel {
+public class DefectModel implements Serializable {
 
     @SerializedName("result")
     @Expose
@@ -16,7 +17,7 @@ public class DefectModel {
     @Expose
     public String status;
 
-    public class Result {
+    public class Result implements Serializable{
 
         @SerializedName("id")
         @Expose
@@ -36,6 +37,17 @@ public class DefectModel {
         @SerializedName("worker_id")
         @Expose
         public String workerId;
+
+
+        @SerializedName("description")
+        @Expose
+        public String description;
+
+        @SerializedName("title")
+        @Expose
+        public String title;
+
+
 
 
 

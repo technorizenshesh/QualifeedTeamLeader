@@ -49,6 +49,9 @@ public class SuspectFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews();
+        if(NetworkAvailablity.checkNetworkStatus(getActivity())) suspectListData();
+        else Toast.makeText(getActivity(), getString(R.string.network_failure), Toast.LENGTH_SHORT).show();
+
     }
 
     private void initViews() {
@@ -57,8 +60,7 @@ public class SuspectFragment extends Fragment {
         adapter = new SuspectAdapter(getActivity(),arrayList);
         binding.rvDefect.setAdapter(adapter);
 
-        if(NetworkAvailablity.checkNetworkStatus(getActivity())) suspectListData();
-        else Toast.makeText(getActivity(), getString(R.string.network_failure), Toast.LENGTH_SHORT).show();
+
 
     }
 
@@ -98,4 +100,9 @@ public class SuspectFragment extends Fragment {
         });
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }
