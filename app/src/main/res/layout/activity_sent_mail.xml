@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+   <ScrollView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:scrollbars="none">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:orientation="vertical">
+
+           <RelativeLayout
+               android:id="@+id/header"
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/_45sdp"
+               android:background="@color/gray_light">
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_centerVertical="true"
+                   android:layout_marginStart="@dimen/_10sdp"
+                   android:fontFamily="@font/poppins_bold"
+                   android:text="Sent"
+                   android:textColor="@color/white"
+                   android:textSize="@dimen/_15sdp" />
+
+
+               <ImageView
+                   android:id="@+id/ivCross"
+                   android:layout_width="@dimen/_30sdp"
+                   android:layout_height="@dimen/_30sdp"
+                   android:layout_alignParentRight="true"
+                   android:layout_centerInParent="true"
+                   android:layout_marginEnd="@dimen/_15sdp"
+
+                   android:visibility="gone"/>
+
+
+           </RelativeLayout>
+
+
+           <EditText
+               android:id="@+id/edTo"
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/_35sdp"
+               android:layout_marginLeft="@dimen/_15sdp"
+               android:layout_marginRight="@dimen/_15sdp"
+               android:layout_marginTop="@dimen/_15sdp"
+               android:fontFamily="@font/poppins_regular"
+               android:textColor="@color/black"
+               android:textColorHint="@color/black"
+               android:textSize="@dimen/_12sdp"
+               android:singleLine="true"
+               android:inputType="textEmailAddress"
+               android:hint="@string/to"/>
+
+
+           <EditText
+               android:id="@+id/edSubject"
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/_35sdp"
+               android:layout_marginLeft="@dimen/_15sdp"
+               android:layout_marginRight="@dimen/_15sdp"
+               android:layout_marginTop="@dimen/_15sdp"
+               android:fontFamily="@font/poppins_regular"
+               android:textColor="@color/black"
+               android:textColorHint="@color/black"
+               android:textSize="@dimen/_12sdp"
+               android:singleLine="true"
+               android:hint="@string/subject"/>
+
+
+
+
+           <EditText
+               android:id="@+id/edMsg"
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/_95sdp"
+               android:layout_marginLeft="@dimen/_15sdp"
+               android:layout_marginRight="@dimen/_15sdp"
+               android:layout_marginTop="@dimen/_25sdp"
+               android:fontFamily="@font/poppins_regular"
+               android:textColor="@color/black"
+               android:hint="@string/compose_your_message"
+               android:textColorHint="@color/black"
+               android:gravity="top|left"
+               android:paddingLeft="@dimen/_10sdp"
+               android:maxLines="3"
+               android:textSize="@dimen/_12sdp" />
+
+
+
+           <ImageView
+               android:id="@+id/ivImg"
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/_200sdp"
+               android:visibility="gone"
+               />
+
+
+
+
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/_80sdp"
+               android:layout_margin="@dimen/_15sdp"
+               >
+
+
+
+
+
+
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:layout_marginBottom="@dimen/_15sdp"
+                   android:layout_marginRight="@dimen/_10sdp"
+                   android:layout_alignParentRight="true"
+                   android:layout_above="@+id/btnSent">
+
+                   <ImageView
+                       android:id="@+id/ivPic"
+                       android:layout_width="@dimen/_20sdp"
+                       android:layout_height="@dimen/_20sdp"
+                       android:src="@drawable/ic_camera"/>
+
+
+               </LinearLayout>
+
+
+               <androidx.appcompat.widget.AppCompatButton
+                   android:id="@+id/btnSent"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:padding="@dimen/_5sdp"
+                   android:background="@color/dark_gray"
+                   android:layout_alignParentBottom="true"
+                   android:text="@string/sent"
+                   android:textColor="@color/white" />
+
+
+
+
+
+           </RelativeLayout>
+
+
+       </LinearLayout>
+
+
+
+   </ScrollView>
+</layout>

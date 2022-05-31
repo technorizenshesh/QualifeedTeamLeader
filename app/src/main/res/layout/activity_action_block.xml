@@ -17,7 +17,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight=".5"
+                android:layout_weight=".3"
                 android:background="#C0CCDA">
 
 
@@ -78,42 +78,37 @@
                         />
 
 
-
-                    <TextView
-                        android:id="@+id/tvControl"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Piece to control"
-                        android:textSize="@dimen/_12sdp"
-                        android:textColor="@color/dark_gray"
+                    <EditText
+                        android:id="@+id/edComment"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_95sdp"
+                        android:layout_marginLeft="@dimen/_15sdp"
+                        android:layout_marginRight="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_25sdp"
                         android:fontFamily="@font/poppins_regular"
-                        android:padding="@dimen/_2sdp"
-
-                        />
-
-
-
-                    <TextView
-                        android:id="@+id/tvSession"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Control Session Time : "
-                        android:textSize="@dimen/_12sdp"
-                        android:textColor="@color/dark_gray"
-                        android:fontFamily="@font/poppins_regular"
-                        android:padding="@dimen/_2sdp"
-                        />
-
-
-                    <TextView
-                        android:id="@+id/tvReportTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_regular"
-                        android:padding="@dimen/_2sdp"
-                        android:text="Repair Time : 00:30"
-                        android:textColor="@color/dark_gray"
+                        android:textColor="@color/black"
+                        android:hint="@string/comment"
+                        android:textColorHint="@color/black"
+                        android:gravity="top|left"
+                        android:paddingLeft="@dimen/_10sdp"
+                        android:maxLines="3"
                         android:textSize="@dimen/_12sdp" />
+
+
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnBlock"
+                        android:layout_width="@dimen/_140sdp"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_7sdp"
+                        android:text="@string/block_the_worker"
+                        android:background="@color/color_red"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="@dimen/_12sdp"
+                        android:layout_margin="@dimen/_10sdp"/>
+
+
 
 
                 </LinearLayout>
@@ -136,14 +131,14 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/_150sdp"
-            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/_120sdp"
             >
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivUser"
                 android:layout_width="@dimen/_70sdp"
                 android:layout_height="@dimen/_70sdp"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:elevation="@dimen/_3sdp"
                 android:src="@drawable/dummy" />
 

@@ -42,5 +42,23 @@
     <string name="repair_time">Repair Time</string>
     <string name="total_session">"Total Session : "</string>
     <string name="defect_discription">Defect Discription</string>
+    <string name="click_the_picture">Click the picture</string>
+    <string name="to">To</string>
+    <string name="subject">Subject</string>
+    <string name="compose_your_message">Compose your Message</string>
+    <string name="sent">sent</string>
+    <string name="please_enter_subject">Please enter subject</string>
+    <string name="please_enter_message">Please enter message</string>
+    <string name="action">Action</string>
+    <string name="send_training">send training</string>
+    <string name="block_the_worker">block the worker</string>
+    <string name="cancel">Cancel</string>
+    <string name="comment">Comment</string>
+    <string name="choose_training_to_the_worker">Choose training to the worker</string>
+    <string name="please_select_training_type">Please select training type</string>
+
+    <string name="block_worker">Worker has been blocked</string>
+    <string name="sent_training">Send training</string>
+
 
 </resources>

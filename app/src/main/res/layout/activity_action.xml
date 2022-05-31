@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".25"
+                android:background="#C0CCDA"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/action"
+                    android:textSize="@dimen/_16sdp"
+                    android:textColor="@color/dark_gray"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:padding="@dimen/_2sdp"
+                    />
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivUser"
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_70sdp"
+                    android:layout_centerInParent="true"
+                    android:elevation="@dimen/_3sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:src="@drawable/dummy" />
+
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".75">
+
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    >
+
+
+
+                    <TextView
+                        android:id="@+id/tvName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Name"
+                        android:textSize="@dimen/_15sdp"
+                        android:textColor="@color/dark_gray"
+                        android:fontFamily="@font/poppins_bold"
+                        android:padding="@dimen/_2sdp"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvWorkerId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="WorkerID"
+                        android:textSize="@dimen/_12sdp"
+                        android:textColor="@color/dark_gray"
+                        android:fontFamily="@font/poppins_regular"
+                        android:padding="@dimen/_2sdp"
+
+                        />
+
+
+
+                    <TextView
+                        android:id="@+id/tvType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="OPERATOR"
+                        android:textSize="@dimen/_12sdp"
+                        android:textColor="@color/dark_gray"
+                        android:fontFamily="@font/poppins_regular"
+                        android:padding="@dimen/_2sdp"
+                        android:layout_marginBottom="@dimen/_20sdp"
+
+                        />
+
+
+                    <androidx.appcompat.widget.AppCompatButton
+                     android:id="@+id/btnTraining"
+                     android:layout_width="@dimen/_140sdp"
+                     android:layout_height="wrap_content"
+                     android:padding="@dimen/_7sdp"
+                     android:text="@string/send_training"
+                     android:layout_margin="@dimen/_10sdp"
+                     android:background="@color/color_blue"
+                     android:textColor="@color/white"
+                     android:fontFamily="@font/poppins_regular"
+                     android:textSize="@dimen/_12sdp"/>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnBlock"
+                        android:layout_width="@dimen/_140sdp"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_7sdp"
+                        android:text="@string/block_the_worker"
+                        android:background="@color/color_red"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="@dimen/_12sdp"
+                        android:layout_margin="@dimen/_10sdp"/>
+
+
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_7sdp"
+            android:text="@string/cancel"
+            android:layout_margin="@dimen/_10sdp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:background="@color/dark_gray"
+            android:textColor="@color/white"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="@dimen/_12sdp"
+            android:textAllCaps="false"/>
+
+
+
+    </RelativeLayout>
+
+</layout>

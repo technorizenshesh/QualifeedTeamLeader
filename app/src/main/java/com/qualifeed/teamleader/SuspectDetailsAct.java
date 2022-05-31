@@ -64,7 +64,9 @@ public class SuspectDetailsAct extends AppCompatActivity {
         }
 
 
-        binding.ivCancel.setOnClickListener(v -> finish());
+        binding.ivCancel.setOnClickListener(v -> {
+                    startActivity(new Intent(SuspectDetailsAct.this,ActionAct.class).putExtra("worker_id",result.workerId));
+        });
 
         binding.ivAccept.setOnClickListener(v -> blockUnblockDialog(result.id,"Do you wanna add this defect to the defect list") );
     }
@@ -95,6 +97,7 @@ public class SuspectDetailsAct extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+
             }
         });
 

@@ -1,6 +1,7 @@
 package com.qualifeed.teamleader;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -65,7 +66,10 @@ public class BlockedDetailAct extends AppCompatActivity {
         }
 
 
-        binding.ivCancel.setOnClickListener(v -> finish());
+        binding.ivCancel.setOnClickListener(v -> {
+            startActivity(new Intent(BlockedDetailAct.this,ActionAct.class).putExtra("worker_id",result.workerId));
+
+        });
 
         binding.ivAccept.setOnClickListener(v -> blockUnblockDialog(result.id,"Do you wanna add this Product to Scrap") );
     }

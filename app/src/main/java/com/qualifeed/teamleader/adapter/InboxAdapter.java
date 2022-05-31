@@ -1,6 +1,7 @@
 package com.qualifeed.teamleader.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -8,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.qualifeed.teamleader.MsgDetailsAct;
 import com.qualifeed.teamleader.R;
 import com.qualifeed.teamleader.databinding.ItemDefectBinding;
 import com.qualifeed.teamleader.databinding.ItemInboxBinding;
@@ -33,9 +35,9 @@ public class InboxAdapter  extends RecyclerView.Adapter<InboxAdapter.MyViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.binding.tvSubject.setText("Subject :" + arrayList.get(position).subject);
-        holder.binding.tvTo.setText("From :" + arrayList.get(position).sender);
-        holder.binding.tvDate.setText("Date :" + arrayList.get(position).dateTime);
+        holder.binding.tvSubject.setText("Subject :" + arrayList.get(position).getSubject());
+        holder.binding.tvTo.setText("From :" + arrayList.get(position).getFromEmail());
+        holder.binding.tvDate.setText("Date :" + arrayList.get(position).getCreatedDate());
     }
 
     @Override
@@ -48,6 +50,11 @@ public class InboxAdapter  extends RecyclerView.Adapter<InboxAdapter.MyViewHolde
         public MyViewHolder(@NonNull ItemInboxBinding itemView) {
             super(itemView.getRoot());
             binding = itemView;
+
+            binding.layoutMain.setOnClickListener(v -> {
+                context.startActivity(new Intent(context, MsgDetailsAct.class)
+                        .putExtra("details",arrayList.get(getAdapterPosition())));
+            });
         }
     }
 }

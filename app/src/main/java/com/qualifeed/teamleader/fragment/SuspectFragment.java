@@ -26,6 +26,8 @@ import com.qualifeed.teamleader.utils.DataManager;
 import com.qualifeed.teamleader.utils.NetworkAvailablity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,7 +42,6 @@ public class SuspectFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        apiInterface = ApiClient.getClient().create(TeamLeadInterface.class);
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_suspect, container, false);
         return binding.getRoot();
     }
@@ -48,9 +49,9 @@ public class SuspectFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        apiInterface = ApiClient.getClient().create(TeamLeadInterface.class);
         initViews();
-        if(NetworkAvailablity.checkNetworkStatus(getActivity())) suspectListData();
-        else Toast.makeText(getActivity(), getString(R.string.network_failure), Toast.LENGTH_SHORT).show();
+
 
     }
 
@@ -67,7 +68,9 @@ public class SuspectFragment extends Fragment {
 
     private void suspectListData() {
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
-        Call<DefectModel> loginCall = apiInterface.getAllDefect();
+        Map<String,String> map = new HashMap<>();
+        map.put("date","2022-06-06");
+        Call<DefectModel> loginCall = apiInterface.getAllDefect(map);
         loginCall.enqueue(new Callback<DefectModel>() {
             @Override
             public void onResponse(Call<DefectModel> call, Response<DefectModel> response) {
@@ -77,6 +80,7 @@ public class SuspectFragment extends Fragment {
                     String responseString = new Gson().toJson(response.body());
                     Log.e(TAG, "Suspect Defect Response :" + responseString);
                     if (data.status.equals("1")) {
+                        binding.tvNotFound.setVisibility(View.GONE);
                         arrayList.clear();
                         arrayList.addAll(data.result);
                         adapter.notifyDataSetChanged();
@@ -84,6 +88,8 @@ public class SuspectFragment extends Fragment {
                     } else if (data.status.equals("0")) {
                         arrayList.clear();
                         adapter.notifyDataSetChanged();
+                        binding.tvNotFound.setVisibility(View.VISIBLE);
+
                     }
 
 
@@ -104,5 +110,7 @@ public class SuspectFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        if(NetworkAvailablity.checkNetworkStatus(getActivity())) suspectListData();
+        else Toast.makeText(getActivity(), getString(R.string.network_failure), Toast.LENGTH_SHORT).show();
     }
 }

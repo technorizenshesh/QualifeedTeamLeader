@@ -1,14 +1,5 @@
 package com.qualifeed.teamleader.retrofit;
 
-
-
-
-
-
-
-
-
-
 import com.qualifeed.teamleader.model.BlockedModel;
 import com.qualifeed.teamleader.model.DashBoradModel;
 import com.qualifeed.teamleader.model.DefectListModel;
@@ -22,6 +13,7 @@ import com.qualifeed.teamleader.model.SentModel;
 import com.qualifeed.teamleader.model.TeamListModel;
 import com.qualifeed.teamleader.model.TeamModel;
 import com.qualifeed.teamleader.model.TimerModel;
+import com.qualifeed.teamleader.model.TrainingModel;
 import com.qualifeed.teamleader.model.WorkerModel;
 
 import java.util.Map;
@@ -62,13 +54,13 @@ public interface TeamLeadInterface {
     @GET("get_all_product_repair_team")
     Call<RepairModel> getAllRepair();
 
+    @FormUrlEncoded
+    @POST("get_all_suspect_defect_team")
+    Call<DefectModel> getAllDefect(@FieldMap Map<String, String> params);
 
-    @GET("get_all_suspect_defect_team")
-    Call<DefectModel> getAllDefect();
-
-
-    @GET("get_all_blocked_list_team")
-    Call<BlockedModel> getAllBlocked();
+    @FormUrlEncoded
+    @POST("get_all_blocked_list_team")
+    Call<BlockedModel> getAllBlocked(@FieldMap Map<String, String> params);
 
     @Multipart
     @POST("add_defact_problem_team")
@@ -103,7 +95,7 @@ public interface TeamLeadInterface {
     Call<InboxModel> getAllInboxMail(@FieldMap Map<String, String> params);
 
     @FormUrlEncoded
-    @POST("send_email")
+    @POST("send_box")
     Call<SentModel> getAllSentMail(@FieldMap Map<String, String> params);
 
 
@@ -127,6 +119,41 @@ public interface TeamLeadInterface {
     @FormUrlEncoded
     @POST("blocked_to_product_defect")
     Call<ResponseBody> addBlockDefectApiCall(@FieldMap Map<String, String> params);
+
+
+
+    @Multipart
+    @POST("send_mail")
+    Call<ResponseBody> sentEmailApiCall(
+            @Part("user_id") RequestBody user_id,
+            @Part("from_email") RequestBody from_email,
+            @Part("to_email") RequestBody to_email,
+            @Part("subject") RequestBody subject,
+            @Part("message") RequestBody message,
+            @Part MultipartBody.Part file);
+
+
+
+    @FormUrlEncoded
+    @POST("get_worker_by_team_temled")
+    Call<ResponseBody> workerDetailApiCall(@FieldMap Map<String, String> params);
+
+
+
+    @FormUrlEncoded
+    @POST("add_block_unblock")
+    Call<ResponseBody> workerBlockedApiCall(@FieldMap Map<String, String> params);
+
+    @FormUrlEncoded
+    @POST("get_training")
+    Call<TrainingModel> getTrainingApiCall(@FieldMap Map<String, String> params);
+
+
+
+    @FormUrlEncoded
+    @POST("send_training")
+    Call<ResponseBody> workerTrainingApiCall(@FieldMap Map<String, String> params);
+
 
 
 }

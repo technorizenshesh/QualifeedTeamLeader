@@ -2,6 +2,7 @@ package com.qualifeed.teamleader;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -64,6 +65,8 @@ public class RepairListAct extends AppCompatActivity {
                     String responseString = new Gson().toJson(response.body());
                     Log.e(TAG, "Repair defect Response :" + responseString);
                     if (data.status.equals("1")) {
+                        binding.tvNotFound.setVisibility(View.GONE);
+
                         arrayList.clear();
                         arrayList.addAll(data.result);
                         adapter.notifyDataSetChanged();
@@ -71,6 +74,8 @@ public class RepairListAct extends AppCompatActivity {
                     } else if (data.status.equals("0")) {
                         arrayList.clear();
                         adapter.notifyDataSetChanged();
+                        binding.tvNotFound.setVisibility(View.VISIBLE);
+
                     }
 
 

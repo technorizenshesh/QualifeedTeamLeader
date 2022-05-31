@@ -26,6 +26,8 @@ import com.qualifeed.teamleader.utils.DataManager;
 import com.qualifeed.teamleader.utils.NetworkAvailablity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -66,7 +68,9 @@ public class BlockedFragment extends Fragment {
 
     private void blockedtListData() {
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
-        Call<BlockedModel> loginCall = apiInterface.getAllBlocked();
+        Map<String,String>map = new HashMap<>();
+        map.put("date","2022-06-06");
+        Call<BlockedModel> loginCall = apiInterface.getAllBlocked(map);
         loginCall.enqueue(new Callback<BlockedModel>() {
             @Override
             public void onResponse(Call<BlockedModel> call, Response<BlockedModel> response) {
@@ -76,6 +80,7 @@ public class BlockedFragment extends Fragment {
                     String responseString = new Gson().toJson(response.body());
                     Log.e(TAG, "Blocked Defect Response :" + responseString);
                     if (data.status.equals("1")) {
+                        binding.tvNotFound.setVisibility(View.GONE);
                         arrayList.clear();
                         arrayList.addAll(data.result);
                         adapter.notifyDataSetChanged();
@@ -83,6 +88,8 @@ public class BlockedFragment extends Fragment {
                     } else if (data.status.equals("0")) {
                         arrayList.clear();
                         adapter.notifyDataSetChanged();
+                        binding.tvNotFound.setVisibility(View.VISIBLE);
+
                     }
 
 

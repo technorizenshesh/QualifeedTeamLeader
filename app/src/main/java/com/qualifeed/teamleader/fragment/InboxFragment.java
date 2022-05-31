@@ -1,5 +1,6 @@
 package com.qualifeed.teamleader.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
 import com.qualifeed.teamleader.R;
+import com.qualifeed.teamleader.SentMailAct;
 import com.qualifeed.teamleader.adapter.InboxAdapter;
 import com.qualifeed.teamleader.adapter.SentAdapter;
 import com.qualifeed.teamleader.adapter.SuspectAdapter;
@@ -60,6 +62,10 @@ public class InboxFragment extends Fragment {
         adapter = new InboxAdapter(getActivity(),arrayList);
         binding.rvInbox.setAdapter(adapter);
 
+        binding.fab.setOnClickListener(v -> {
+            startActivity(new Intent(getActivity(), SentMailAct.class));
+        });
+
         if(NetworkAvailablity.checkNetworkStatus(getActivity())) inboxListData();
         else Toast.makeText(getActivity(), getString(R.string.network_failure), Toast.LENGTH_SHORT).show();
 
@@ -69,7 +75,7 @@ public class InboxFragment extends Fragment {
     private void inboxListData() {
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         Map<String,String>map = new HashMap<>();
-        map.put("email","worker@gmail.com"/*DataManager.getInstance().getUserData(getActivity()).result.email*/);
+        map.put("email",DataManager.getInstance().getUserData(getActivity()).result.email);
         Call<InboxModel> loginCall = apiInterface.getAllInboxMail(map);
         loginCall.enqueue(new Callback<InboxModel>() {
             @Override
@@ -79,13 +85,13 @@ public class InboxFragment extends Fragment {
                     InboxModel data = response.body();
                     String responseString = new Gson().toJson(response.body());
                     Log.e(TAG, "Inbox List Response :" + responseString);
-                    if (data.status.equals("1")) {
+                    if (data.getStatus().equals("1")) {
                         binding.tvNotFound.setVisibility(View.GONE);
                         arrayList.clear();
-                        arrayList.addAll(data.result);
+                        arrayList.addAll(data.getResult());
                         adapter.notifyDataSetChanged();
 
-                    } else if (data.status.equals("0")) {
+                    } else if (data.getResult().equals("0")) {
                         binding.tvNotFound.setVisibility(View.VISIBLE);
                         arrayList.clear();
                         adapter.notifyDataSetChanged();

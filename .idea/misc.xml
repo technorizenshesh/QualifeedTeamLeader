@@ -7,15 +7,20 @@
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/drawable/circle_orange_bg.xml" value="0.18177083333333333" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/drawable/circle_red_bg.xml" value="0.18177083333333333" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/drawable/circle_yellow_bg.xml" value="0.18177083333333333" />
+        <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/activity_action.xml" value="0.14140625" />
+        <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/activity_action_block.xml" value="0.1" />
+        <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/activity_action_training.xml" value="0.1" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/activity_blocked.xml" value="0.1" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/activity_blocked_details.xml" value="0.153125" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/activity_communication.xml" value="0.153125" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/activity_dashborad.xml" value="0.165625" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/activity_msg_details.xml" value="0.1" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/activity_new_defect.xml" value="0.1" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/activity_repair.xml" value="0.153125" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/activity_scrap.xml" value="0.153125" />
+        <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/activity_sent_mail.xml" value="0.12" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/activity_suspect_details.xml" value="0.13828125" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/activity_team_list.xml" value="0.153125" />
         <entry key="..\:/MyProjects/QualifeedTeamLeader/app/src/main/res/layout/activity_worker_profile.xml" value="0.153125" />

@@ -33,6 +33,7 @@ import com.qualifeed.teamleader.adapter.MyAdapter;
 import com.qualifeed.teamleader.adapter.TypeAdapter;
 import com.qualifeed.teamleader.databinding.ActivityDashboradBinding;
 import com.qualifeed.teamleader.model.DashBoradModel;
+import com.qualifeed.teamleader.model.DefectModel;
 import com.qualifeed.teamleader.model.ProductTypeModel;
 import com.qualifeed.teamleader.retrofit.ApiClient;
 import com.qualifeed.teamleader.retrofit.DateSetListener;
