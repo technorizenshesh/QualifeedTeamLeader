@@ -15,7 +15,8 @@
                 android:id="@+id/layoutDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="visible">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -24,7 +25,8 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_15sdp"
                     android:orientation="horizontal"
-                    android:weightSum="1">
+                    android:weightSum="1"
+                    android:visibility="gone">
 
 
                     <TextView
@@ -53,7 +55,8 @@
                     android:layout_height="1dp"
                     android:layout_marginStart="@dimen/_13sdp"
                     android:layout_marginEnd="@dimen/_13sdp"
-                    android:background="@color/dark_gray" />
+                    android:background="@color/dark_gray"
+                    android:visibility="gone"/>
 
 
                 <TextView
@@ -65,14 +68,16 @@
                     android:gravity="center_vertical"
                     android:text="@string/date"
                     android:textColor="@color/dark_gray"
-                    android:textSize="@dimen/_10sdp" />
+                    android:textSize="@dimen/_10sdp"
+                    android:visibility="gone"/>
 
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginEnd="@dimen/_15sdp">
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/tvDate"
@@ -110,9 +115,11 @@
                     android:layout_marginStart="@dimen/_13sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_13sdp"
-                    android:background="@color/dark_gray" />
+                    android:background="@color/dark_gray"
+                    android:visibility="gone"/>
 
                 <LinearLayout
+                    android:id="@+id/layoutShift"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginStart="@dimen/_15sdp"
@@ -154,41 +161,41 @@
             </LinearLayout>
 
 
-            <RelativeLayout
-                android:id="@+id/layoutTotal"
-                android:layout_width="match_parent"
+        <RelativeLayout
+            android:id="@+id/layoutTotal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutDate"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/layoutDate"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp">
+                android:layout_alignParentLeft="true"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_11sdp"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center_vertical"
+                android:text="@string/total_session"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11sdp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginTop="@dimen/_11sdp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:gravity="center_vertical"
-                    android:text="@string/total_session"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_11sdp" />
-
-                <TextView
-                    android:id="@+id/tvTotalTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginTop="@dimen/_11sdp"
-                    android:layout_marginRight="@dimen/_10sdp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="11"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_11sdp" />
+            <TextView
+                android:id="@+id/tvTotalTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_11sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="11"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11sdp" />
 
 
-            </RelativeLayout>
+        </RelativeLayout>
 
 
             <LinearLayout
@@ -258,7 +265,9 @@
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/poppins_regular"
                 android:text="Not available"
+                android:layout_below="@+id/layoutDate"
                 android:textColor="@color/black"
+                android:layout_marginTop="@dimen/_100sdp"
                 android:textSize="@dimen/_12sdp"
                 android:visibility="gone" />
 

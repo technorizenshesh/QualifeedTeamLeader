@@ -1,5 +1,6 @@
 package com.qualifeed.teamleader.fragment;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -41,16 +42,24 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DefectFragment extends Fragment {
-    public String TAG = "DefectFragment";
-    FragmentDefectBinding binding;
+    public static String TAG = "DefectFragment";
+    private static FragmentDefectBinding binding;
     TypeAdapter adapter;
-    DefectProductAdapter defectProductAdapter;
+    private static DefectProductAdapter defectProductAdapter;
 
-    ArrayList<ProductTypeModel.Result> arrayList;
-    ArrayList<DefectListModel.Result> defecArrayList;
+    public static ArrayList<ProductTypeModel.Result> arrayList;
+    public static ArrayList<DefectListModel.Result> defecArrayList;
 
-    TeamLeadInterface apiInterface;
-    String productTypeId="",date="";
+    private static TeamLeadInterface apiInterface;
+    String productTypeId = "", date = "";
+    private static Context context;
+
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.context = context;
+    }
 
 
     @Nullable
@@ -73,15 +82,16 @@ public class DefectFragment extends Fragment {
         date = DataManager.getCurrent1();
         binding.tvDate.setText(DataManager.convertDateToString3(date));
 
-        adapter = new TypeAdapter(getActivity(),arrayList);
+        adapter = new TypeAdapter(getActivity(), arrayList);
         binding.spinnerType.setAdapter(adapter);
 
-        defectProductAdapter = new DefectProductAdapter(getActivity(),defecArrayList);
+        defectProductAdapter = new DefectProductAdapter(getActivity(), defecArrayList);
         binding.rvDefect.setAdapter(defectProductAdapter);
 
 
-        if(NetworkAvailablity.checkNetworkStatus(getActivity())) getProductType();
-        else Toast.makeText(getActivity(), getString(R.string.network_failure), Toast.LENGTH_SHORT).show();
+        if (NetworkAvailablity.checkNetworkStatus(getActivity())) getProductType();
+        else
+            Toast.makeText(getActivity(), getString(R.string.network_failure), Toast.LENGTH_SHORT).show();
 
         binding.spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -104,7 +114,7 @@ public class DefectFragment extends Fragment {
     }
 
 
-    public  void DatePicker(Context context) {
+    public void DatePicker(Context context) {
         final Calendar myCalendar = Calendar.getInstance();
 
         DatePickerDialog.OnDateSetListener date1 = new DatePickerDialog.OnDateSetListener() {
@@ -119,20 +129,22 @@ public class DefectFragment extends Fragment {
                 //  listener.SelectedDate(sdf.format(myCalendar.getTime()));
                 date = sdf.format(myCalendar.getTime());
                 binding.tvDate.setText(DataManager.convertDateToString3(date));
-                if(NetworkAvailablity.checkNetworkStatus(context)) getDefectData(productTypeId,date);
-                else Toast.makeText(context, getString(R.string.network_failure), Toast.LENGTH_SHORT).show();
+                if (NetworkAvailablity.checkNetworkStatus(context))
+                    getDefectData(productTypeId, date);
+                else
+                    Toast.makeText(context, getString(R.string.network_failure), Toast.LENGTH_SHORT).show();
 
             }
 
         };
-        DatePickerDialog datePickerDialog= new DatePickerDialog(context, date1, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
-       // datePickerDialog.getDatePicker().setMinDate(myCalendar.getTimeInMillis());
-         datePickerDialog.getDatePicker().setMaxDate(myCalendar.getTimeInMillis()/*+ (1000*60*60*24*2)*/);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(context, date1, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
+        // datePickerDialog.getDatePicker().setMinDate(myCalendar.getTimeInMillis());
+        datePickerDialog.getDatePicker().setMaxDate(myCalendar.getTimeInMillis()/*+ (1000*60*60*24*2)*/);
 
         datePickerDialog.show();
     }
 
-    public void getProductType(){
+    public void getProductType() {
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         Call<ProductTypeModel> loginCall = apiInterface.getProductType();
         loginCall.enqueue(new Callback<ProductTypeModel>() {
@@ -146,10 +158,10 @@ public class DefectFragment extends Fragment {
                     if (data.status.equals("1")) {
                         arrayList.clear();
                         arrayList.addAll(data.result);
-                        productTypeId  = data.result.get(0).id;
+                        productTypeId = data.result.get(0).id;
                         adapter.notifyDataSetChanged();
 
-                        getDefectData(productTypeId,date);
+                        getDefectData(productTypeId, date);
 
                     } else if (data.status.equals("0")) {
                         arrayList.clear();
@@ -170,11 +182,11 @@ public class DefectFragment extends Fragment {
         });
     }
 
-    private void getDefectData(String productTypeId, String date) {
-        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
-        Map<String,String> map = new HashMap<>();
-        map.put("type","SE");
-        map.put("date",date);
+    private static void getDefectData(String productTypeId, String date) {
+        DataManager.getInstance().showProgressMessage((Activity) context, context.getString(R.string.please_wait));
+        Map<String, String> map = new HashMap<>();
+        map.put("type", "SE");
+        map.put("date", date);
         Log.e(TAG, " Product Defect List Request :" + map);
         Call<DefectListModel> loginCall = apiInterface.getDefectList(map);
         loginCall.enqueue(new Callback<DefectListModel>() {
@@ -190,7 +202,7 @@ public class DefectFragment extends Fragment {
                         defecArrayList.clear();
                         defecArrayList.addAll(data.getResult());
                         defectProductAdapter.notifyDataSetChanged();
-                       // getDefectData(productTypeId,date);
+                        // getDefectData(productTypeId,date);
 
                     } else if (data.getStatus().equals("0")) {
                         binding.tvNotFound.setVisibility(View.VISIBLE);
@@ -210,6 +222,14 @@ public class DefectFragment extends Fragment {
                 DataManager.getInstance().hideProgressMessage();
             }
         });
+    }
+
+
+    public static void DefectTab(String productId, String date) {
+        if (NetworkAvailablity.checkNetworkStatus(context)) getDefectData(productId, date);
+        else
+            Toast.makeText(context, context.getString(R.string.network_failure), Toast.LENGTH_SHORT).show();
+
     }
 
 

@@ -32,6 +32,9 @@ import com.google.gson.Gson;
 import com.qualifeed.teamleader.adapter.MyAdapter;
 import com.qualifeed.teamleader.adapter.TypeAdapter;
 import com.qualifeed.teamleader.databinding.ActivityDashboradBinding;
+import com.qualifeed.teamleader.fragment.DefectFragment;
+import com.qualifeed.teamleader.fragment.ProductFragment;
+import com.qualifeed.teamleader.fragment.TimerFragment;
 import com.qualifeed.teamleader.model.DashBoradModel;
 import com.qualifeed.teamleader.model.DefectModel;
 import com.qualifeed.teamleader.model.ProductTypeModel;
@@ -58,20 +61,21 @@ public class DashboardAct extends AppCompatActivity {
     public String TAG = "DashboardAct";
     ActivityDashboradBinding binding;
     TypeAdapter adapter;
-    ArrayList<ProductTypeModel.Result>arrayList;
+    ArrayList<ProductTypeModel.Result> arrayList;
     TeamLeadInterface apiInterface;
-    String productTypeId="",date="";
+    String productTypeId = "", date = "";
     String str_image_path = "";
     private static final int REQUEST_CAMERA = 1;
     private static final int MY_PERMISSION_CONSTANT = 5;
     private Uri uriSavedImage;
+    int tabPos = 0;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         apiInterface = ApiClient.getClient().create(TeamLeadInterface.class);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_dashborad);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_dashborad);
         initViews();
     }
 
@@ -84,7 +88,7 @@ public class DashboardAct extends AppCompatActivity {
 
 
         binding.layoutDefect.setOnClickListener(v -> {
-            if(checkPermisssionForReadStorage())
+            if (checkPermisssionForReadStorage())
                 openCamera();
         });
 
@@ -94,26 +98,47 @@ public class DashboardAct extends AppCompatActivity {
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Timer"));
         binding.tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        binding.viewPager.setAdapter(new MyAdapter(DashboardAct.this,getSupportFragmentManager(), binding.tabLayout.getTabCount()));
+        binding.viewPager.setAdapter(new MyAdapter(DashboardAct.this, getSupportFragmentManager(), binding.tabLayout.getTabCount()));
         binding.viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(binding.tabLayout));
         binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 binding.viewPager.setCurrentItem(tab.getPosition());
+                Log.e("tab position===", tab.getPosition() + "");
+                tabPos = tab.getPosition();
+                if (tab.getPosition() == 0) {
+                    if (!productTypeId.equals("")) {
+                        if (!date.equals("")) ProductFragment.ProductTab(productTypeId, date);
+                    }
+                } else if (tab.getPosition() == 1) {
+                    if (!productTypeId.equals("")) {
+                        if (!date.equals("")) DefectFragment.DefectTab(productTypeId, date);
+                    }
+
+
+                } else if (tab.getPosition() == 2) {
+                    if (!productTypeId.equals("")) {
+                        if (!date.equals("")) TimerFragment.TimerTab(productTypeId, date);
+                    }
+
+                }
             }
+
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
             }
+
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
 
-        adapter = new TypeAdapter(DashboardAct.this,arrayList);
+        adapter = new TypeAdapter(DashboardAct.this, arrayList);
         binding.spinnerType.setAdapter(adapter);
 
-        if(NetworkAvailablity.checkNetworkStatus(DashboardAct.this)) getProductType();
-        else Toast.makeText(DashboardAct.this, getString(R.string.network_failure), Toast.LENGTH_SHORT).show();
+        if (NetworkAvailablity.checkNetworkStatus(DashboardAct.this)) getProductType();
+        else
+            Toast.makeText(DashboardAct.this, getString(R.string.network_failure), Toast.LENGTH_SHORT).show();
 
         binding.spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -134,8 +159,7 @@ public class DashboardAct extends AppCompatActivity {
         });
 
 
-
-       // binding.tvBlocked.setOnClickListener(v -> startActivity(new Intent(DashboardAct.this, BlockedAct.class)));
+        // binding.tvBlocked.setOnClickListener(v -> startActivity(new Intent(DashboardAct.this, BlockedAct.class)));
 
         binding.tvScrap.setOnClickListener(v -> startActivity(new Intent(DashboardAct.this, ScrapListAct.class)));
 
@@ -147,8 +171,8 @@ public class DashboardAct extends AppCompatActivity {
 
     }
 
-    private void setChar(String d1,String d2,String d3) {
-        BarData data = new BarData(getDataSet(d1,d2,d3));
+    private void setChar(String d1, String d2, String d3) {
+        BarData data = new BarData(getDataSet(d1, d2, d3));
         binding.chart.setData(data);
         binding.chart.animateXY(2000, 2000);
         binding.chart.invalidate();
@@ -172,18 +196,18 @@ public class DashboardAct extends AppCompatActivity {
     }
 
 
-    private BarDataSet getDataSet(String d1,String d2,String d3) {
+    private BarDataSet getDataSet(String d1, String d2, String d3) {
 
         ArrayList<BarEntry> entries = new ArrayList();
         entries.add(new BarEntry(0f, Float.parseFloat(d3)));
         entries.add(new BarEntry(2f, Float.parseFloat(d2)));
         entries.add(new BarEntry(4f, Float.parseFloat(d1)));
-     //   entries.add(new BarEntry(12f, 3));
-    //    entries.add(new BarEntry(18f, 4));
-   //     entries.add(new BarEntry(9f, 5));
+        //   entries.add(new BarEntry(12f, 3));
+        //    entries.add(new BarEntry(18f, 4));
+        //     entries.add(new BarEntry(9f, 5));
 
-        BarDataSet dataset = new BarDataSet(entries,"hi");
-        dataset.setColors(new int[]{R.color.color_yellow , R.color.color_red,R.color.color_green} , DashboardAct.this);
+        BarDataSet dataset = new BarDataSet(entries, "hi");
+        dataset.setColors(new int[]{R.color.color_yellow, R.color.color_red, R.color.color_green}, DashboardAct.this);
 
         return dataset;
     }
@@ -200,8 +224,7 @@ public class DashboardAct extends AppCompatActivity {
     }
 
 
-
-    public void getProductType(){
+    public void getProductType() {
         DataManager.getInstance().showProgressMessage(DashboardAct.this, getString(R.string.please_wait));
         Call<ProductTypeModel> loginCall = apiInterface.getProductType();
         loginCall.enqueue(new Callback<ProductTypeModel>() {
@@ -215,10 +238,10 @@ public class DashboardAct extends AppCompatActivity {
                     if (data.status.equals("1")) {
                         arrayList.clear();
                         arrayList.addAll(data.result);
-                        productTypeId  = data.result.get(0).id;
+                        productTypeId = data.result.get(0).id;
                         adapter.notifyDataSetChanged();
 
-                        getDashBoradData(productTypeId,date);
+                        getDashBoradData(productTypeId, date);
 
                     } else if (data.status.equals("0")) {
                         arrayList.clear();
@@ -241,49 +264,65 @@ public class DashboardAct extends AppCompatActivity {
 
     private void getDashBoradData(String productTypeId, String date) {
 
-            DataManager.getInstance().showProgressMessage(DashboardAct.this, getString(R.string.please_wait));
-            Map<String,String>map = new HashMap<>();
-            map.put("date","2022-04-05");
-          //  map.put("product_type",productTypeId);
-            Log.e(TAG,"Get Dashboard Request : "+map.toString());
-            Call<DashBoradModel> loginCall = apiInterface.getDashData(map);
-            loginCall.enqueue(new Callback<DashBoradModel>() {
-                @Override
-                public void onResponse(Call<DashBoradModel> call, Response<DashBoradModel> response) {
-                    DataManager.getInstance().hideProgressMessage();
-                    try {
-                        DashBoradModel data = response.body();
-                        String responseString = new Gson().toJson(response.body());
-                        Log.e(TAG, "Get Dashboard Response :" + responseString);
-                        if (data.status.equals("1")) {
-                            binding.layoutChart.setVisibility(View.VISIBLE);
-                            binding.tvTotal.setVisibility(View.VISIBLE);
-                            binding.tvTotal.setText(data.result.total + " Total");
-                            setChar(data.result.totalChecked,data.result.totalScrap,data.result.totalProductRepair);
+        DataManager.getInstance().showProgressMessage(DashboardAct.this, getString(R.string.please_wait));
+        Map<String, String> map = new HashMap<>();
+        map.put("date", "2022-04-05");
+        //  map.put("product_type",productTypeId);
+        Log.e(TAG, "Get Dashboard Request : " + map.toString());
+        Call<DashBoradModel> loginCall = apiInterface.getDashData(map);
+        loginCall.enqueue(new Callback<DashBoradModel>() {
+            @Override
+            public void onResponse(Call<DashBoradModel> call, Response<DashBoradModel> response) {
+                DataManager.getInstance().hideProgressMessage();
+                try {
+                    DashBoradModel data = response.body();
+                    String responseString = new Gson().toJson(response.body());
+                    Log.e(TAG, "Get Dashboard Response :" + responseString);
+                    if (data.status.equals("1")) {
+                        binding.layoutChart.setVisibility(View.VISIBLE);
+                        binding.tvTotal.setVisibility(View.VISIBLE);
+                        binding.tvTotal.setText(data.result.total + " Total");
+                        setChar(data.result.totalChecked, data.result.totalScrap, data.result.totalProductRepair);
 
-                        } else if (data.status.equals("0")) {
-                            binding.layoutChart.setVisibility(View.GONE);
-                            binding.tvTotal.setVisibility(View.GONE);
-
-
+                        if (tabPos == 0) {
+                            if (!productTypeId.equals("")) {
+                                if (!date.equals(""))
+                                    ProductFragment.ProductTab(productTypeId, date);
+                            }
+                        } else if (tabPos == 1) {
+                            if (!productTypeId.equals("")) {
+                                if (!date.equals("")) DefectFragment.DefectTab(productTypeId, date);
+                            }
+                        } else if (tabPos == 2) {
+                            if (!productTypeId.equals("")) {
+                                if (!date.equals("")) TimerFragment.TimerTab(productTypeId, date);
+                            }
                         }
 
 
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    } else if (data.status.equals("0")) {
+                        binding.layoutChart.setVisibility(View.GONE);
+                        binding.tvTotal.setVisibility(View.GONE);
+
+
                     }
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+            }
 
-                @Override
-                public void onFailure(Call<DashBoradModel> call, Throwable t) {
-                    call.cancel();
-                    DataManager.getInstance().hideProgressMessage();
-                }
-            });
-        }
+            @Override
+            public void onFailure(Call<DashBoradModel> call, Throwable t) {
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+            }
+        });
+    }
 
 
-    public  void DatePicker(Context context) {
+    public void DatePicker(Context context) {
         final Calendar myCalendar = Calendar.getInstance();
 
         DatePickerDialog.OnDateSetListener date1 = new DatePickerDialog.OnDateSetListener() {
@@ -295,22 +334,22 @@ public class DashboardAct extends AppCompatActivity {
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 String myFormat = "yyyy-MM-dd"; // your format "  dd-MM-yyyy
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
-              //  listener.SelectedDate(sdf.format(myCalendar.getTime()));
+                //  listener.SelectedDate(sdf.format(myCalendar.getTime()));
                 date = sdf.format(myCalendar.getTime());
-                if(NetworkAvailablity.checkNetworkStatus(context)) getDashBoradData(productTypeId,date);
-                else Toast.makeText(context, getString(R.string.network_failure), Toast.LENGTH_SHORT).show();
+                if (NetworkAvailablity.checkNetworkStatus(context))
+                    getDashBoradData(productTypeId, date);
+                else
+                    Toast.makeText(context, getString(R.string.network_failure), Toast.LENGTH_SHORT).show();
 
             }
 
         };
-        DatePickerDialog datePickerDialog= new DatePickerDialog(context, date1, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
-        datePickerDialog.getDatePicker().setMinDate(myCalendar.getTimeInMillis());
+        DatePickerDialog datePickerDialog = new DatePickerDialog(context, date1, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
+        //  datePickerDialog.getDatePicker().setMinDate(myCalendar.getTimeInMillis());
         // datePickerDialog.getDatePicker().setMaxDate(myCalendar.getTimeInMillis()+ (1000*60*60*24*2));
 
         datePickerDialog.show();
     }
-
-
 
 
     private void openCamera() {
@@ -346,12 +385,12 @@ public class DashboardAct extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             Log.e("Result_code", requestCode + "");
             if (requestCode == REQUEST_CAMERA) {
-                startActivity(new Intent(DashboardAct.this,NewDefectAct.class)
-                .putExtra("defect_image",str_image_path));
+                startActivity(new Intent(DashboardAct.this, NewDefectAct.class)
+                        .putExtra("defect_image", str_image_path));
 
             }
 
-       }
+        }
     }
 
 
@@ -433,8 +472,6 @@ public class DashboardAct extends AppCompatActivity {
 
         }
     }
-
-
 
 
 }

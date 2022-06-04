@@ -127,11 +127,11 @@ public class TimerFregRepository {
                         try {
                             if (response.body() != null) {
                                 String responseData =  new Gson().toJson(response.body(),TimerModel.class)   ;// != null ? response.body().toString() : "";
-                                Log.e("Accept Reject Response", responseData);
+                                Log.e("get Timer Response", responseData);
                                 if (response.body().getStatus().equals("1")) {
                                     timeBodyMutableLiveData.postValue(response.body());
                                 } else if (response.body().getStatus().equals("0")) {
-                                    timeBodyMutableLiveData.postValue(null);
+                                    timeBodyMutableLiveData.postValue(response.body());
                                 }
 
                             }

@@ -45,13 +45,21 @@ import okhttp3.ResponseBody;
 
 public class TimerFragment extends Fragment {
     private static final String TAG = TimerFragment.class.getSimpleName();
-    FragmentTimerBinding binding;
-    TimerFragmentViewModel timerFragmentViewModel;
+   private static FragmentTimerBinding binding;
+    private  static TimerFragmentViewModel timerFragmentViewModel;
     ArrayList<ProductTypeModel.Result> productTypeArrayList;
-    ArrayList<TeamListModel.Result> teamArrayList;
+   private static ArrayList<TeamListModel.Result> teamArrayList;
     TypeAdapter adapter;
     TeamListAdapter teamListAdapter;
-    String productTypeId ="",teamId="",date="";
+   private static String productTypeId ="",teamId="1",date="";
+    private static Context context;
+
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.context = context;
+    }
 
 
     @Override
@@ -160,8 +168,8 @@ public class TimerFragment extends Fragment {
         if(NetworkAvailablity.checkNetworkStatus(getActivity())) timerFragmentViewModel.teamListViewModel(DataManager.getInstance().getUserData(getActivity()).result.id);
         else Toast.makeText(getActivity(), getString(R.string.network_failure), Toast.LENGTH_SHORT).show();
 
-        if(NetworkAvailablity.checkNetworkStatus(getActivity())) timerFragmentViewModel.productTypeRepoViewModel();
-        else Toast.makeText(getActivity(), getString(R.string.network_failure), Toast.LENGTH_SHORT).show();
+    //    if(NetworkAvailablity.checkNetworkStatus(getActivity())) timerFragmentViewModel.productTypeRepoViewModel();
+   //     else Toast.makeText(getActivity(), getString(R.string.network_failure), Toast.LENGTH_SHORT).show();
 
 
 
@@ -173,11 +181,14 @@ public class TimerFragment extends Fragment {
         binding.tvDate.setText(DataManager.convertDateToString3(date));
 
 
+/*
         binding.tvDate.setOnClickListener(v -> {
             DatePicker(getActivity());
 
         });
+*/
 
+/*
         binding.spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -189,6 +200,7 @@ public class TimerFragment extends Fragment {
 
             }
         });
+*/
 
 
         binding.spinnerTeam.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -300,6 +312,14 @@ public class TimerFragment extends Fragment {
         return labels;
     }
 
+
+
+    public static void TimerTab(String productId, String date11) {
+      productTypeId = productId;
+      date = date11;
+      timerFragmentViewModel.timerViewModel(productTypeId,teamId,date,DataManager.getInstance().getUserData(context).result.id);
+
+    }
 
 
 

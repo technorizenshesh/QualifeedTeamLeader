@@ -1,5 +1,7 @@
 package com.qualifeed.teamleader.fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,10 +36,17 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProductFragment extends Fragment {
-    public String TAG = "ProductFragment";
-    FragmentProductBinding binding;
-    TeamLeadInterface apiInterface;
+    public static String TAG = "ProductFragment";
+    private static FragmentProductBinding binding;
+    private static TeamLeadInterface apiInterface;
+    private static Context context;
 
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.context = context;
+    }
 
     @Nullable
     @Override
@@ -51,24 +60,25 @@ public class ProductFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         apiInterface = ApiClient.getClient().create(TeamLeadInterface.class);
 
-        if(NetworkAvailablity.checkNetworkStatus(getActivity())) getDashBoradData("","");
-         else Toast.makeText(getActivity(), getString(R.string.network_failure), Toast.LENGTH_SHORT).show();
+        if (NetworkAvailablity.checkNetworkStatus(getActivity())) getDashBoradData("", "");
+        else
+            Toast.makeText(getActivity(), getString(R.string.network_failure), Toast.LENGTH_SHORT).show();
 
-         binding.layoutBlock.setOnClickListener(v -> startActivity(new Intent(getActivity(), BlockedAct.class)));
+        binding.layoutBlock.setOnClickListener(v -> startActivity(new Intent(getActivity(), BlockedAct.class)));
 
-         binding.layoutScrap.setOnClickListener(v -> startActivity(new Intent(getActivity(), ScrapListAct.class)));
+        binding.layoutScrap.setOnClickListener(v -> startActivity(new Intent(getActivity(), ScrapListAct.class)));
 
-         binding.layoutRepair.setOnClickListener(v -> startActivity(new Intent(getActivity(), RepairListAct.class)));
+        binding.layoutRepair.setOnClickListener(v -> startActivity(new Intent(getActivity(), RepairListAct.class)));
 
 
     }
 
-    private void getDashBoradData(String productTypeId, String date) {
-        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
-        Map<String,String> map = new HashMap<>();
-        map.put("date","2022-04-05");
+    private static void getDashBoradData(String productTypeId, String date) {
+        DataManager.getInstance().showProgressMessage((Activity) context, context.getString(R.string.please_wait));
+        Map<String, String> map = new HashMap<>();
+        map.put("date", "2022-04-05");
         //  map.put("product_type",productTypeId);
-        Log.e(TAG,"Get Dashboard Request : "+map.toString());
+        Log.e(TAG, "Get Dashboard Request : " + map.toString());
         Call<DashBoradModel> loginCall = apiInterface.getDashData(map);
         loginCall.enqueue(new Callback<DashBoradModel>() {
             @Override
@@ -87,7 +97,6 @@ public class ProductFragment extends Fragment {
                         binding.tvRepair.setText(data.result.totalProductRepair);
                         binding.tvScrap.setText(data.result.totalScrap);
                         binding.tvBlocked.setText(data.result.totalBlocked);
-
 
 
                     } else if (data.status.equals("0")) {
@@ -110,5 +119,11 @@ public class ProductFragment extends Fragment {
         });
     }
 
+    public static void ProductTab(String productId, String date) {
+        if (NetworkAvailablity.checkNetworkStatus(context)) getDashBoradData("", "");
+        else
+            Toast.makeText(context, context.getString(R.string.network_failure), Toast.LENGTH_SHORT).show();
+
+    }
 
 }

@@ -61,10 +61,6 @@ public class ActionAct extends AppCompatActivity {
                     .putExtra("id",id).putExtra("name",name).putExtra("team",teamName).putExtra("image",image).putExtra("product_id",productId));
         });
 
-        binding.btnTraining.setOnClickListener(v -> {
-            startActivity(new Intent(ActionAct.this,BlockedAct.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-            finish();
-        });
 
 
 
