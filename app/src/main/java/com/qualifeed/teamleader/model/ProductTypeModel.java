@@ -32,7 +32,13 @@ public class ProductTypeModel {
         @Expose
         public String dateTime;
 
+        @SerializedName("product_type_1")
+        @Expose
+        public String productType1;
 
+        @SerializedName("product_type_2")
+        @Expose
+        public String productType2;
 
     }
 

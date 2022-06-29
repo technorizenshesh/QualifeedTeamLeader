@@ -63,7 +63,7 @@ public class DashboardAct extends AppCompatActivity {
     TypeAdapter adapter;
     ArrayList<ProductTypeModel.Result> arrayList;
     TeamLeadInterface apiInterface;
-    String productTypeId = "", date = "";
+    String productTypeId = "",type1="",type2="", date = "";
     String str_image_path = "";
     private static final int REQUEST_CAMERA = 1;
     private static final int MY_PERMISSION_CONSTANT = 5;
@@ -107,8 +107,8 @@ public class DashboardAct extends AppCompatActivity {
                 Log.e("tab position===", tab.getPosition() + "");
                 tabPos = tab.getPosition();
                 if (tab.getPosition() == 0) {
-                    if (!productTypeId.equals("")) {
-                        if (!date.equals("")) ProductFragment.ProductTab(productTypeId, date);
+                    if (!type1.equals("")) {
+                        if (!date.equals("")) ProductFragment.ProductTab(type1,type2, date);
                     }
                 } else if (tab.getPosition() == 1) {
                     if (!productTypeId.equals("")) {
@@ -143,6 +143,15 @@ public class DashboardAct extends AppCompatActivity {
         binding.spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(!type1.equals("")) {
+                    type1 = arrayList.get(position).productType1;
+                    type2 = arrayList.get(position).productType2;
+                    if (tabPos == 0){
+                        ProductFragment.ProductTab(type1,type2, date);
+
+                    }
+
+                }
 
             }
 
@@ -239,6 +248,10 @@ public class DashboardAct extends AppCompatActivity {
                         arrayList.clear();
                         arrayList.addAll(data.result);
                         productTypeId = data.result.get(0).id;
+
+                        type1 = data.result.get(0).productType1;
+                        type2 = data.result.get(0).productType2;
+
                         adapter.notifyDataSetChanged();
 
                         getDashBoradData(productTypeId, date);
@@ -287,7 +300,7 @@ public class DashboardAct extends AppCompatActivity {
                         if (tabPos == 0) {
                             if (!productTypeId.equals("")) {
                                 if (!date.equals(""))
-                                    ProductFragment.ProductTab(productTypeId, date);
+                                    ProductFragment.ProductTab(type1,type2, date);
                             }
                         } else if (tabPos == 1) {
                             if (!productTypeId.equals("")) {

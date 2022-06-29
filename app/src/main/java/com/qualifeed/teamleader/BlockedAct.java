@@ -13,6 +13,8 @@ import com.qualifeed.teamleader.databinding.ActivityBlockedBinding;
 
 public class BlockedAct extends AppCompatActivity {
     ActivityBlockedBinding binding;
+    public static String type1="",type2="",date="";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +23,13 @@ public class BlockedAct extends AppCompatActivity {
     }
 
     private void initViews() {
+        if(getIntent()!=null){
+            type1 = getIntent().getStringExtra("type1");
+            type2 = getIntent().getStringExtra("type2");
+            date = getIntent().getStringExtra("date");
+
+        }
+
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Suspect Defect"));
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Blocked"));
         binding.tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);

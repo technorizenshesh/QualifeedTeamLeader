@@ -3,6 +3,7 @@ package com.qualifeed.teamleader.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -35,10 +36,11 @@ public class BlockedAdapter extends RecyclerView.Adapter<BlockedAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.binding.tvId.setText("Defect ID :" + arrayList.get(position).id);
-        holder.binding.tvWorkerId.setText("Worker ID :" + arrayList.get(position).workerId);
-        holder.binding.tvProductId.setText("Product ID :" + arrayList.get(position).productId);
-        holder.binding.tvDate.setText("Date :" + arrayList.get(position).dateTime);
+     //   holder.binding.tvId.setText("Defect ID :" + arrayList.get(position).id);
+        holder.binding.tvId.setVisibility(View.GONE);
+        holder.binding.tvWorkerId.setText("Worker ID : " + arrayList.get(position).workerId);
+        holder.binding.tvProductId.setText("ProductRef : " + arrayList.get(position).productRef);
+        holder.binding.tvDate.setText("Date : " + arrayList.get(position).dateTime);
     }
 
     @Override

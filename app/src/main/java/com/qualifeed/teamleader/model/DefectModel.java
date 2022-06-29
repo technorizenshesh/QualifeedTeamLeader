@@ -48,7 +48,19 @@ public class DefectModel implements Serializable {
         public String title;
 
 
+        @SerializedName("productref")
+        @Expose
+        public String productRef;
 
+
+        @SerializedName("product_type_1")
+        @Expose
+        public String productType1;
+
+
+        @SerializedName("product_type_2")
+        @Expose
+        public String productType2;
 
 
     }

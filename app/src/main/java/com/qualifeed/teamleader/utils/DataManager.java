@@ -236,6 +236,31 @@ public class DataManager {
         return str;
     }
 
+    public static String convertDateToString5(String date1) {
+        String str = "";
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            Date dt = format.parse(date1);
+            str = dateFormat.format(dt);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+       /* Date date = new Date(l);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
+        str = dateFormat.format(date);*/
+        Log.e("DateTime====",str);
+        return str;
+    }
+
+
+
+
 
 
     public static String convertStringToTime(String date1){

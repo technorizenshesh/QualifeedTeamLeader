@@ -40,7 +40,7 @@ public class ProductFragment extends Fragment {
     private static FragmentProductBinding binding;
     private static TeamLeadInterface apiInterface;
     private static Context context;
-
+   public static String type1="",type2="",date="";
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -64,7 +64,11 @@ public class ProductFragment extends Fragment {
         else
             Toast.makeText(getActivity(), getString(R.string.network_failure), Toast.LENGTH_SHORT).show();
 
-        binding.layoutBlock.setOnClickListener(v -> startActivity(new Intent(getActivity(), BlockedAct.class)));
+        binding.layoutBlock.setOnClickListener(v -> startActivity(new Intent(getActivity(), BlockedAct.class)
+                .putExtra("type1",type1)
+                .putExtra("type2",type2)
+                .putExtra("date",date))
+        );
 
         binding.layoutScrap.setOnClickListener(v -> startActivity(new Intent(getActivity(), ScrapListAct.class)));
 
@@ -119,7 +123,11 @@ public class ProductFragment extends Fragment {
         });
     }
 
-    public static void ProductTab(String productId, String date) {
+    public static void ProductTab(String Protype1,String Protype2, String date11) {
+        type1 = Protype1;
+        type2 = Protype2;
+        date = date11;
+
         if (NetworkAvailablity.checkNetworkStatus(context)) getDashBoradData("", "");
         else
             Toast.makeText(context, context.getString(R.string.network_failure), Toast.LENGTH_SHORT).show();

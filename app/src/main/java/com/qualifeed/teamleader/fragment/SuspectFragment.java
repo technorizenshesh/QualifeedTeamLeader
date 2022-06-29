@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
+import com.qualifeed.teamleader.BlockedAct;
 import com.qualifeed.teamleader.R;
 import com.qualifeed.teamleader.RepairListAct;
 import com.qualifeed.teamleader.adapter.RepairAdapter;
@@ -69,7 +70,11 @@ public class SuspectFragment extends Fragment {
     private void suspectListData() {
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         Map<String,String> map = new HashMap<>();
-        map.put("date","2022-06-06");
+        map.put("date", DataManager.convertDateToString5(BlockedAct.date));
+        map.put("product_type_1", BlockedAct.type1);
+        map.put("product_type_2", BlockedAct.type2);
+        Log.e(TAG, "Suspect Defect Request :" + map);
+
         Call<DefectModel> loginCall = apiInterface.getAllDefect(map);
         loginCall.enqueue(new Callback<DefectModel>() {
             @Override
