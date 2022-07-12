@@ -60,6 +60,12 @@ public class BlockedModel implements Serializable {
         @Expose
         public String productType2;
 
+
+        @SerializedName("comment")
+        @Expose
+        public String comment;
+
+
     }
 
 }

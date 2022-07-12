@@ -22,6 +22,8 @@ import com.qualifeed.teamleader.utils.DataManager;
 import com.qualifeed.teamleader.utils.NetworkAvailablity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,6 +35,7 @@ public class RepairListAct extends AppCompatActivity {
     TeamLeadInterface apiInterface;
     RepairAdapter adapter;
     ArrayList<RepairModel.Result>arrayList;
+    String type1="",type2="",date="";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +45,15 @@ public class RepairListAct extends AppCompatActivity {
     }
 
     private void initViews() {
+
+        if(getIntent()!=null){
+            type1 = getIntent().getStringExtra("type1");
+            type2 = getIntent().getStringExtra("type2");
+            date = getIntent().getStringExtra("date");
+
+        }
+
+
         arrayList = new ArrayList<>();
 
         adapter = new RepairAdapter(RepairListAct.this,arrayList);
@@ -55,7 +67,12 @@ public class RepairListAct extends AppCompatActivity {
 
     private void repairListData() {
         DataManager.getInstance().showProgressMessage(RepairListAct.this, getString(R.string.please_wait));
-        Call<RepairModel> loginCall = apiInterface.getAllRepair();
+        Map<String,String> map = new HashMap<>();
+        map.put("date", DataManager.convertDateToString5(date));
+        map.put("product_type_1", type1);
+        map.put("product_type_2", type2);
+        Log.e(TAG, "Repair Defect Request :" + map);
+        Call<RepairModel> loginCall = apiInterface.getAllRepair(map);
         loginCall.enqueue(new Callback<RepairModel>() {
             @Override
             public void onResponse(Call<RepairModel> call, Response<RepairModel> response) {
@@ -66,7 +83,6 @@ public class RepairListAct extends AppCompatActivity {
                     Log.e(TAG, "Repair defect Response :" + responseString);
                     if (data.status.equals("1")) {
                         binding.tvNotFound.setVisibility(View.GONE);
-
                         arrayList.clear();
                         arrayList.addAll(data.result);
                         adapter.notifyDataSetChanged();

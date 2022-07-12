@@ -60,19 +60,33 @@ public class ProductFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         apiInterface = ApiClient.getClient().create(TeamLeadInterface.class);
 
-        if (NetworkAvailablity.checkNetworkStatus(getActivity())) getDashBoradData("", "");
+        if (NetworkAvailablity.checkNetworkStatus(getActivity())) getDashBoradData("", date);
         else
             Toast.makeText(getActivity(), getString(R.string.network_failure), Toast.LENGTH_SHORT).show();
 
-        binding.layoutBlock.setOnClickListener(v -> startActivity(new Intent(getActivity(), BlockedAct.class)
-                .putExtra("type1",type1)
-                .putExtra("type2",type2)
-                .putExtra("date",date))
-        );
+        binding.layoutBlock.setOnClickListener(v -> {
+            if(!binding.tvBlocked.getText().toString().equals("0")) {
+                startActivity(new Intent(getActivity(), BlockedAct.class)
+                        .putExtra("type1", type1)
+                        .putExtra("type2", type2)
+                        .putExtra("date", date));
+            }
+        });
 
-        binding.layoutScrap.setOnClickListener(v -> startActivity(new Intent(getActivity(), ScrapListAct.class)));
+        binding.layoutScrap.setOnClickListener(v -> {
+            if(!binding.tvScrap.getText().toString().equals("0")) {
+                startActivity(new Intent(getActivity(), ScrapListAct.class));
+            }
+        });
 
-        binding.layoutRepair.setOnClickListener(v -> startActivity(new Intent(getActivity(), RepairListAct.class)));
+        binding.layoutRepair.setOnClickListener(v -> {
+            if(!binding.tvRepair.getText().toString().equals("0")){
+                startActivity(new Intent(getActivity(), RepairListAct.class)
+                        .putExtra("type1",type1)
+                        .putExtra("type2",type2)
+                        .putExtra("date",date));
+            }
+        });
 
 
     }
@@ -80,7 +94,9 @@ public class ProductFragment extends Fragment {
     private static void getDashBoradData(String productTypeId, String date) {
         DataManager.getInstance().showProgressMessage((Activity) context, context.getString(R.string.please_wait));
         Map<String, String> map = new HashMap<>();
-        map.put("date", "2022-04-05");
+        map.put("date", date);
+        map.put("product_type_1", type1 );
+        map.put("product_type_2", type2 );
         //  map.put("product_type",productTypeId);
         Log.e(TAG, "Get Dashboard Request : " + map.toString());
         Call<DashBoradModel> loginCall = apiInterface.getDashData(map);
@@ -128,7 +144,7 @@ public class ProductFragment extends Fragment {
         type2 = Protype2;
         date = date11;
 
-        if (NetworkAvailablity.checkNetworkStatus(context)) getDashBoradData("", "");
+        if (NetworkAvailablity.checkNetworkStatus(context)) getDashBoradData("", date);
         else
             Toast.makeText(context, context.getString(R.string.network_failure), Toast.LENGTH_SHORT).show();
 

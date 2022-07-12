@@ -254,7 +254,7 @@ public class DashboardAct extends AppCompatActivity {
 
                         adapter.notifyDataSetChanged();
 
-                        getDashBoradData(productTypeId, date);
+                        getDashBoradData(/*productTypeId*/ type1,type2, date);
 
                     } else if (data.status.equals("0")) {
                         arrayList.clear();
@@ -275,11 +275,13 @@ public class DashboardAct extends AppCompatActivity {
         });
     }
 
-    private void getDashBoradData(String productTypeId, String date) {
+    private void getDashBoradData(/*String productTypeId,*/ String ty1,String ty2, String date) {
 
         DataManager.getInstance().showProgressMessage(DashboardAct.this, getString(R.string.please_wait));
         Map<String, String> map = new HashMap<>();
-        map.put("date", "2022-04-05");
+        map.put("date", date ); // "2022-04-05"
+        map.put("product_type_1", ty1 );
+        map.put("product_type_2", ty2 );
         //  map.put("product_type",productTypeId);
         Log.e(TAG, "Get Dashboard Request : " + map.toString());
         Call<DashBoradModel> loginCall = apiInterface.getDashData(map);
@@ -350,7 +352,7 @@ public class DashboardAct extends AppCompatActivity {
                 //  listener.SelectedDate(sdf.format(myCalendar.getTime()));
                 date = sdf.format(myCalendar.getTime());
                 if (NetworkAvailablity.checkNetworkStatus(context))
-                    getDashBoradData(productTypeId, date);
+                    getDashBoradData(type1,type2, date);
                 else
                     Toast.makeText(context, getString(R.string.network_failure), Toast.LENGTH_SHORT).show();
 

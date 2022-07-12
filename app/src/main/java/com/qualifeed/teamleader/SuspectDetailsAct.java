@@ -49,7 +49,7 @@ public class SuspectDetailsAct extends AppCompatActivity {
         if(getIntent()!=null){
             result = (DefectModel.Result) getIntent().getSerializableExtra("suspect_defect");
             binding.tvTitle.setText(result.comment);
-            binding.tvProductId.setText("Product Id : "+result.productId);
+            binding.tvProductId.setText("ProductRef : "+result.productRef);
             binding.tvDate.setText("Date : "+result.dateTime);
             binding.tvWorkerId.setText("Worker Id : "+result.workerId);
             binding.tvDiscription.setText(result.comment);

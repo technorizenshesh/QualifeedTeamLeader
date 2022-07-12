@@ -37,7 +37,19 @@ public class RepairModel {
         @Expose
         public String workerId;
 
+        @SerializedName("productref")
+        @Expose
+        public String productRef;
 
+
+        @SerializedName("product_type_1")
+        @Expose
+        public String productType1;
+
+
+        @SerializedName("product_type_2")
+        @Expose
+        public String productType2;
 
     }
 

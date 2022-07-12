@@ -33,10 +33,10 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.binding.tvId.setText("Product ID :" + arrayList.get(position).productId);
-        holder.binding.tvWorkerId.setText("Worker ID :" + arrayList.get(position).workerId);
-        holder.binding.tvRepairTime.setText("Repair Time :" + arrayList.get(position).timer);
-        holder.binding.tvDate.setText("Date :" + arrayList.get(position).dateTime);
+        holder.binding.tvId.setText("ProductRef : " + arrayList.get(position).productRef);
+        holder.binding.tvWorkerId.setText("Worker ID : " + arrayList.get(position).workerId);
+        holder.binding.tvRepairTime.setText("Repair Time : " + arrayList.get(position).timer);
+        holder.binding.tvDate.setText("Date : " + arrayList.get(position).dateTime);
 
     }
 

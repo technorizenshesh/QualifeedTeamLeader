@@ -51,8 +51,13 @@ public interface TeamLeadInterface {
     @GET("get_all_scrap_team")
     Call<ScrapModel> getAllScrap();
 
-    @GET("get_all_product_repair_team")
-    Call<RepairModel> getAllRepair();
+ /*   @GET("get_all_product_repair_team")
+    Call<RepairModel> getAllRepair();*/
+
+    @FormUrlEncoded
+    @POST("get_all_product_repair_team")
+    Call<RepairModel> getAllRepair(@FieldMap Map<String, String> params);
+
 
     @FormUrlEncoded
     @POST("get_all_suspect_defect_team")

@@ -51,10 +51,10 @@ public class BlockedDetailAct extends AppCompatActivity {
         if(getIntent()!=null){
             result = (BlockedModel.Result) getIntent().getSerializableExtra("block_defect");
             binding.tvTitle.setText(result.title);
-            binding.tvProductId.setText("Product Id : "+result.productId);
+            binding.tvProductId.setText("ProductRef : "+result.productRef);
             binding.tvDate.setText("Date : "+result.dateTime);
             binding.tvWorkerId.setText("Worker Id : "+result.workerId);
-            binding.tvDiscription.setText(result.description);
+            binding.tvDiscription.setText(result.comment);
 
             Glide.with(BlockedDetailAct.this)
                     .load(result.image)
