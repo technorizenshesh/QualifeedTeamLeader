@@ -114,7 +114,7 @@ public class TimerFregRepository {
     public void timerDataRepo(String productType, String teamId, String date, String teamLeadId) {
         DataManager.getInstance().showProgressMessage((Activity) context, context.getString(R.string.please_wait));
         Map<String, String> map = new HashMap<>();
-        map.put("pro_id", productType);
+       // map.put("pro_id", productType);
         map.put("team_id", teamId);
         map.put("date", date);
         map.put("teamleader_id", teamLeadId);

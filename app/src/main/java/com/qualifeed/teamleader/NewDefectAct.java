@@ -40,7 +40,8 @@ public class NewDefectAct extends AppCompatActivity {
     TypeAdapter adapter;
     ArrayList<ProductTypeModel.Result> arrayList;
     TeamLeadInterface apiInterface;
-    String productTypeId="",defectImage="";
+    String productTypeId="",defectImage="",type1="",type2="";
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,6 +73,10 @@ public class NewDefectAct extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 productTypeId = arrayList.get(position).id;
+                if(!type1.equals("")) {
+                    type1 = arrayList.get(position).productType1;
+                    type2 = arrayList.get(position).productType2;
+                }
             }
 
             @Override
@@ -85,8 +90,16 @@ public class NewDefectAct extends AppCompatActivity {
 
 
         binding.btnAdd.setOnClickListener(v -> {
+            if(type1.equals(""))
+                Toast.makeText(NewDefectAct.this, "Please select product type", Toast.LENGTH_SHORT).show();
+
             if(binding.etDefectId.getText().toString().equals(""))
-                Toast.makeText(NewDefectAct.this, "Please add Defect Id", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NewDefectAct.this, "Please add product ref", Toast.LENGTH_SHORT).show();
+
+
+            if(binding.etDefectTitle.getText().toString().equals(""))
+                Toast.makeText(NewDefectAct.this, "Please add title", Toast.LENGTH_SHORT).show();
+
 
             if(binding.etDes.getText().toString().equals(""))
                 Toast.makeText(NewDefectAct.this, "Please add Defect Description", Toast.LENGTH_SHORT).show();
@@ -145,14 +158,16 @@ public class NewDefectAct extends AppCompatActivity {
         }
 
         RequestBody team_lead_id = RequestBody.create(MediaType.parse("text/plain"), DataManager.getInstance().getUserData(NewDefectAct.this).result.id);
-        RequestBody productId = RequestBody.create(MediaType.parse("text/plain"), productTypeId);
+        RequestBody typ1 = RequestBody.create(MediaType.parse("text/plain"), type1);
+        RequestBody typ2 = RequestBody.create(MediaType.parse("text/plain"), type2);
+        RequestBody proRef = RequestBody.create(MediaType.parse("text/plain"), binding.etDefectId.getText().toString());
+        RequestBody title = RequestBody.create(MediaType.parse("text/plain"), binding.etDefectTitle.getText().toString());
         RequestBody dess = RequestBody.create(MediaType.parse("text/plain"), binding.etDes.getText().toString());
-        RequestBody defect_id = RequestBody.create(MediaType.parse("text/plain"), binding.etDefectId.getText().toString());
         RequestBody save_defect = RequestBody.create(MediaType.parse("text/plain"), SaveDefect);
 
 
 
-        Call<Map<String, String>> loginCall = apiInterface.addNewDefect(team_lead_id,productId,dess, defect_id,save_defect, filePart);
+        Call<Map<String, String>> loginCall = apiInterface.addNewDefect(team_lead_id,typ1,typ2,proRef,title,dess,save_defect, filePart);
         loginCall.enqueue(new Callback<Map<String,String>>() {
             @Override
             public void onResponse(Call<Map<String,String>> call, Response<Map<String,String>> response) {
@@ -198,6 +213,9 @@ public class NewDefectAct extends AppCompatActivity {
                         arrayList.clear();
                         arrayList.addAll(data.result);
                         productTypeId  = data.result.get(0).id;
+                        type1 = data.result.get(0).productType1;
+                        type2 = data.result.get(0).productType2;
+
                         adapter.notifyDataSetChanged();
                     } else if (data.status.equals("0")) {
                         arrayList.clear();

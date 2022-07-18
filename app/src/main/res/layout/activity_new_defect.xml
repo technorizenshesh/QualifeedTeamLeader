@@ -71,6 +71,9 @@
                 android:background="@color/dark_gray" />
 
 
+
+
+
             <EditText
                 android:id="@+id/etDefectId"
                 android:layout_width="match_parent"
@@ -80,8 +83,28 @@
                 android:background="@null"
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="center_vertical"
-                android:hint="@string/defect_id"
+                android:hint="@string/product_ref"
                 android:textColor="@color/gray_light"
+                android:textColorHint="@color/gray_light"
+                android:inputType="number"
+                android:singleLine="true"
+                android:textSize="@dimen/_12sdp" />
+
+
+
+            <EditText
+                android:id="@+id/etDefectTitle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@null"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center_vertical"
+                android:hint="@string/title"
+                android:textColor="@color/gray_light"
+                android:singleLine="true"
+                android:inputType="text"
                 android:textColorHint="@color/gray_light"
                 android:textSize="@dimen/_12sdp" />
 
@@ -105,6 +128,7 @@
                 android:hint="@string/defect_des"
                 android:textColor="@color/gray_light"
                 android:textColorHint="@color/gray_light"
+                android:singleLine="true"
                 android:textSize="@dimen/_12sdp" />
 
 

@@ -53,6 +53,7 @@ public class TimerFragment extends Fragment {
     TeamListAdapter teamListAdapter;
    private static String productTypeId ="",teamId="1",date="";
     private static Context context;
+    public static String type1="",type2="";
 
 
     @Override
@@ -314,9 +315,10 @@ public class TimerFragment extends Fragment {
 
 
 
-    public static void TimerTab(String productId, String date11) {
-      productTypeId = productId;
-      date = date11;
+    public static void TimerTab(String Protype1,String Protype2 , String date11) {
+        type1 = Protype1;
+        type2 = Protype2;
+        date = date11;
       timerFragmentViewModel.timerViewModel(productTypeId,teamId,date,DataManager.getInstance().getUserData(context).result.id);
 
     }

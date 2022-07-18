@@ -59,6 +59,7 @@
 
     <string name="block_worker">Worker has been blocked</string>
     <string name="sent_training">Send training</string>
-
+    <string name="product_ref">Product Ref</string>
+    <string name="title">Title</string>
 
 </resources>

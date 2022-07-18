@@ -59,6 +59,7 @@ public class BlockedDetailAct extends AppCompatActivity {
             Glide.with(BlockedDetailAct.this)
                     .load(result.image)
                     .override(150,150)
+                    .placeholder(R.drawable.dummy)
                     .error(R.drawable.dummy)
                     .into(binding.ivImg);
 
@@ -67,7 +68,10 @@ public class BlockedDetailAct extends AppCompatActivity {
 
 
         binding.ivCancel.setOnClickListener(v -> {
-            startActivity(new Intent(BlockedDetailAct.this,ActionAct.class).putExtra("worker_id",result.workerId));
+            startActivity(new Intent(BlockedDetailAct.this,ActionAct.class).putExtra("worker_id",result.workerId)
+            .putExtra("product_ref",result.productRef)
+                    .putExtra("type1",result.productType1)
+                    .putExtra("type2",result.productType2));
 
         });
 

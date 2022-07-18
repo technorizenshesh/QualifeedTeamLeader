@@ -107,6 +107,8 @@ public class TeamListAct extends AppCompatActivity implements onPosListener {
         Map<String,String>map = new HashMap<>();
         map.put("team_leader_id",DataManager.getInstance().getUserData(TeamListAct.this).result.id);
         map.put("worker_id",workerId);
+        map.put("status",status);
+
         Log.e(TAG, "Block Worker Request :" + map);
         Call<Map<String,String>> loginCall = apiInterface.blockWorker(map);
         loginCall.enqueue(new Callback<Map<String,String>>() {

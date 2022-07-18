@@ -33,9 +33,9 @@ public class ScrapAdapter extends RecyclerView.Adapter<ScrapAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.binding.tvId.setText("Defect ID :" + arrayList.get(position).productDefectsId);
+        holder.binding.tvId.setText("Defect ID :" + arrayList.get(position).id);
         holder.binding.tvWorkerId.setText("Worker ID :" + arrayList.get(position).workerId);
-        holder.binding.tvProductId.setText("Product ID :" + arrayList.get(position).productId);
+        holder.binding.tvProductId.setText("ProductRef  :" + arrayList.get(position).productId);
         holder.binding.tvDate.setText("Date :" + arrayList.get(position).dateTime);
 
     }

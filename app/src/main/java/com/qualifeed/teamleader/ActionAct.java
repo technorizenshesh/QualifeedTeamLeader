@@ -33,7 +33,7 @@ public class ActionAct extends AppCompatActivity {
     public String TAG = "ActionAct";
     ActivityActionBinding binding;
     TeamLeadInterface apiInterface;
-    String workerId="",id="",name="",image="",teamName="",type="",productId="";
+    String workerId="",id="",name="",image="",teamName="",type="",productId="",product_ref="",type1="",type2="";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +45,10 @@ public class ActionAct extends AppCompatActivity {
     private void initViews() {
         if(getIntent()!=null) {
             workerId  = getIntent().getStringExtra("worker_id");
+            product_ref  = getIntent().getStringExtra("product_ref");
+            type1  = getIntent().getStringExtra("type1");
+            type2  = getIntent().getStringExtra("type2");
+
             if(NetworkAvailablity.checkNetworkStatus(ActionAct.this)) getWorkerDetail(workerId);
             else Toast.makeText(ActionAct.this, getString(R.string.network_failure), Toast.LENGTH_SHORT).show();
         }
@@ -52,13 +56,20 @@ public class ActionAct extends AppCompatActivity {
 
         binding.btnBlock.setOnClickListener(v -> {
             startActivity(new Intent(ActionAct.this,BlockActionAct.class)
-            .putExtra("id",id).putExtra("name",name).putExtra("team",teamName).putExtra("image",image));
+            .putExtra("id",id)
+                    .putExtra("name",name)
+                    .putExtra("team",teamName)
+                    .putExtra("image",image));
         });
 
 
         binding.btnTraining.setOnClickListener(v -> {
             startActivity(new Intent(ActionAct.this,TrainingActionAct.class)
-                    .putExtra("id",id).putExtra("name",name).putExtra("team",teamName).putExtra("image",image).putExtra("product_id",productId));
+                    .putExtra("id",id)
+                    .putExtra("name",name).
+                            putExtra("team",teamName)
+                    .putExtra("image",image)
+                    .putExtra("product_id",productId));
         });
 
 
@@ -89,13 +100,13 @@ public class ActionAct extends AppCompatActivity {
                         name = data.getJSONObject("result").getString("name");
                         image = data.getJSONObject("result").getString("image");
                         teamName = data.getJSONObject("result").getString("team_name");
-                        id = data.getJSONObject("result").getString("id");
+                        id = data.getJSONObject("result").getString("team_id");
                         type = data.getJSONObject("result").getString("product_type");
                         productId = data.getJSONObject("result").getString("product_id");
 
 
                         binding.tvName.setText("" +name );
-                        binding.tvType.setText("" + type);
+                        binding.tvType.setText("" + type1+"/"+type2); // type
                         binding.tvWorkerId.setText("WorkerID : " + id);
                         //   binding.tvControl.setText("Piece to control : " );
                         //  binding.tvSession.setText("Control Session Time : " );

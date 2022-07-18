@@ -51,8 +51,8 @@ public class DefectFragment extends Fragment {
     public static ArrayList<DefectListModel.Result> defecArrayList;
 
     private static TeamLeadInterface apiInterface;
-    String productTypeId = "", date = "";
     private static Context context;
+    public static String type1="",type2="",date="";
 
 
     @Override
@@ -89,7 +89,7 @@ public class DefectFragment extends Fragment {
         binding.rvDefect.setAdapter(defectProductAdapter);
 
 
-        if (NetworkAvailablity.checkNetworkStatus(getActivity())) getProductType();
+     /*   if (NetworkAvailablity.checkNetworkStatus(getActivity())) getProductType();
         else
             Toast.makeText(getActivity(), getString(R.string.network_failure), Toast.LENGTH_SHORT).show();
 
@@ -103,7 +103,7 @@ public class DefectFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
 
 
         binding.tvDate.setOnClickListener(v -> {
@@ -130,7 +130,7 @@ public class DefectFragment extends Fragment {
                 date = sdf.format(myCalendar.getTime());
                 binding.tvDate.setText(DataManager.convertDateToString3(date));
                 if (NetworkAvailablity.checkNetworkStatus(context))
-                    getDefectData(productTypeId, date);
+                    getDefectData(type1,type2, date);
                 else
                     Toast.makeText(context, getString(R.string.network_failure), Toast.LENGTH_SHORT).show();
 
@@ -158,10 +158,10 @@ public class DefectFragment extends Fragment {
                     if (data.status.equals("1")) {
                         arrayList.clear();
                         arrayList.addAll(data.result);
-                        productTypeId = data.result.get(0).id;
+                      //  productTypeId = data.result.get(0).id;
                         adapter.notifyDataSetChanged();
 
-                        getDefectData(productTypeId, date);
+                       // getDefectData(productTypeId, date);
 
                     } else if (data.status.equals("0")) {
                         arrayList.clear();
@@ -182,11 +182,12 @@ public class DefectFragment extends Fragment {
         });
     }
 
-    private static void getDefectData(String productTypeId, String date) {
+    private static void getDefectData(String type1,String type2, String date) {
         DataManager.getInstance().showProgressMessage((Activity) context, context.getString(R.string.please_wait));
         Map<String, String> map = new HashMap<>();
-        map.put("type", "SE");
-        map.put("date", date);
+        map.put("date", DataManager.convertDateToString5(date));
+        map.put("product_type_1", type1 );
+        map.put("product_type_2", type2 );
         Log.e(TAG, " Product Defect List Request :" + map);
         Call<DefectListModel> loginCall = apiInterface.getDefectList(map);
         loginCall.enqueue(new Callback<DefectListModel>() {
@@ -225,8 +226,11 @@ public class DefectFragment extends Fragment {
     }
 
 
-    public static void DefectTab(String productId, String date) {
-        if (NetworkAvailablity.checkNetworkStatus(context)) getDefectData(productId, date);
+    public static void DefectTab(String Protype1,String Protype2, String date11) {
+        type1 = Protype1;
+        type2 = Protype2;
+        date = date11;
+        if (NetworkAvailablity.checkNetworkStatus(context)) getDefectData(type1,type2, date);
         else
             Toast.makeText(context, context.getString(R.string.network_failure), Toast.LENGTH_SHORT).show();
 

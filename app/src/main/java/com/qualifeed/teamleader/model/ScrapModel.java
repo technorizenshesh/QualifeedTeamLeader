@@ -44,6 +44,23 @@ public class ScrapModel {
         @Expose
         public String productDefectsId;
 
+        @SerializedName("productref")
+        @Expose
+        public String productRef;
+
+        @SerializedName("product_type_1")
+        @Expose
+        public String productType1;
+
+        @SerializedName("product_type_2")
+        @Expose
+        public String productType2;
+
+
+        @SerializedName("team_leader_id")
+        @Expose
+        public String team_leader_id;
+
 
 
     }

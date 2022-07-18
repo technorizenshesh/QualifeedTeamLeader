@@ -71,12 +71,13 @@ public interface TeamLeadInterface {
     @POST("add_defact_problem_team")
     Call<Map<String,String>> addNewDefect(
             @Part("team_leader_id") RequestBody team_leader_id,
-            @Part("product_id") RequestBody product_id,
+            @Part("product_type_1") RequestBody product_type_1,
+            @Part("product_type_2") RequestBody product_type_2,
+            @Part("productref") RequestBody productref,
+            @Part("title") RequestBody title,
             @Part("description") RequestBody description,
-            @Part("defect_id") RequestBody defect_id,
             @Part("save_defect") RequestBody save_defect,
             @Part MultipartBody.Part file);
-
 
 
     @FormUrlEncoded
@@ -149,11 +150,15 @@ public interface TeamLeadInterface {
     @POST("add_block_unblock")
     Call<ResponseBody> workerBlockedApiCall(@FieldMap Map<String, String> params);
 
-    @FormUrlEncoded
+    /*@FormUrlEncoded
     @POST("get_training")
-    Call<TrainingModel> getTrainingApiCall(@FieldMap Map<String, String> params);
+    Call<TrainingModel> getTrainingApiCall(@FieldMap Map<String, String> params);*/
 
 
+
+
+    @GET("get_training")
+    Call<TrainingModel> getTrainingApiCall();
 
     @FormUrlEncoded
     @POST("send_training")

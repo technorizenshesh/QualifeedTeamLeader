@@ -114,9 +114,9 @@ public class TrainingActionAct extends AppCompatActivity {
     public void getTrainingList(String productId) {
         DataManager.getInstance().showProgressMessage(TrainingActionAct.this, getString(R.string.please_wait));
         Map<String, String> map = new HashMap<>();
-        map.put("product_id", productId);
+       // map.put("product_id", productId);
         Log.e(TAG, "Get Training List Request " + map);
-        Call<TrainingModel> loginCall = apiInterface.getTrainingApiCall(map);
+        Call<TrainingModel> loginCall = apiInterface.getTrainingApiCall();
         loginCall.enqueue(new Callback<TrainingModel>() {
             @Override
             public void onResponse(Call<TrainingModel> call, Response<TrainingModel> response) {
@@ -168,7 +168,11 @@ public class TrainingActionAct extends AppCompatActivity {
                         JSONObject data = new JSONObject(responseData);
                         if (data.get("status").equals("1")) {
                             Toast.makeText(TrainingActionAct.this,getText(R.string.sent_training), Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(TrainingActionAct.this,BlockedAct.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                              startActivity(new Intent(TrainingActionAct.this, BlockedAct.class)
+                                .putExtra("date", BlockedAct.date)
+                                .putExtra("type1", BlockedAct.type1)
+                                .putExtra("type2", BlockedAct.type2)
+                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                             finish();
                         } else if (data.get("status").equals("0")) {
                             Toast.makeText(TrainingActionAct.this, data.getJSONObject("result").getString("message"), Toast.LENGTH_SHORT).show();

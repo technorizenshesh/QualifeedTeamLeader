@@ -69,6 +69,7 @@ public class BlockActionAct extends AppCompatActivity {
         map.put("worker_id",id);
         map.put("team_leader_id",DataManager.getInstance().getUserData(BlockActionAct.this).result.id);
         map.put("comment",binding.edComment.getText().toString());
+        map.put("status","Block");
         Log.e(TAG, "Worker Block  Request :" + map);
         Call<ResponseBody> loginCall = apiInterface.workerBlockedApiCall(map);
         loginCall.enqueue(new Callback<ResponseBody>() {
@@ -81,8 +82,11 @@ public class BlockActionAct extends AppCompatActivity {
                     JSONObject data = new JSONObject(responseData);
                     if (data.get("status").equals("1")) {
                         Toast.makeText(BlockActionAct.this,getText(R.string.block_worker), Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(BlockActionAct.this,BlockedAct.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                        finish();
+                        startActivity(new Intent(BlockActionAct.this, BlockedAct.class)
+                                .putExtra("date", BlockedAct.date)
+                                .putExtra("type1", BlockedAct.type1)
+                                .putExtra("type2", BlockedAct.type2)
+                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));                        finish();
                     } else if (data.get("status").equals("0")) {
                         Toast.makeText(BlockActionAct.this, data.getJSONObject("result").getString("message"), Toast.LENGTH_SHORT).show();
                     }

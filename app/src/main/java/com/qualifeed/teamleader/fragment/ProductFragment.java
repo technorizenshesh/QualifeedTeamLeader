@@ -94,7 +94,7 @@ public class ProductFragment extends Fragment {
     private static void getDashBoradData(String productTypeId, String date) {
         DataManager.getInstance().showProgressMessage((Activity) context, context.getString(R.string.please_wait));
         Map<String, String> map = new HashMap<>();
-        map.put("date", date);
+        map.put("date", DataManager.convertDateToString5(date));
         map.put("product_type_1", type1 );
         map.put("product_type_2", type2 );
         //  map.put("product_type",productTypeId);

@@ -112,13 +112,13 @@ public class DashboardAct extends AppCompatActivity {
                     }
                 } else if (tab.getPosition() == 1) {
                     if (!productTypeId.equals("")) {
-                        if (!date.equals("")) DefectFragment.DefectTab(productTypeId, date);
+                        if (!date.equals("")) DefectFragment.DefectTab(type1,type2, date);
                     }
 
 
                 } else if (tab.getPosition() == 2) {
                     if (!productTypeId.equals("")) {
-                        if (!date.equals("")) TimerFragment.TimerTab(productTypeId, date);
+                        if (!date.equals("")) TimerFragment.TimerTab(type1,type2, date);
                     }
 
                 }
@@ -172,7 +172,10 @@ public class DashboardAct extends AppCompatActivity {
 
         binding.tvScrap.setOnClickListener(v -> startActivity(new Intent(DashboardAct.this, ScrapListAct.class)));
 
-        binding.tvRepair.setOnClickListener(v -> startActivity(new Intent(DashboardAct.this, RepairListAct.class)));
+        binding.tvRepair.setOnClickListener(v -> startActivity(new Intent(DashboardAct.this, RepairListAct.class)
+        .putExtra("date",date)
+        .putExtra("type1",type1)
+        .putExtra("type2",type2)));
 
         binding.layoutTeam.setOnClickListener(v -> startActivity(new Intent(DashboardAct.this, TeamListAct.class)));
 
@@ -279,7 +282,7 @@ public class DashboardAct extends AppCompatActivity {
 
         DataManager.getInstance().showProgressMessage(DashboardAct.this, getString(R.string.please_wait));
         Map<String, String> map = new HashMap<>();
-        map.put("date", date ); // "2022-04-05"
+        map.put("date", DataManager.convertDateToString5(date) ); // "2022-04-05"
         map.put("product_type_1", ty1 );
         map.put("product_type_2", ty2 );
         //  map.put("product_type",productTypeId);
@@ -306,11 +309,11 @@ public class DashboardAct extends AppCompatActivity {
                             }
                         } else if (tabPos == 1) {
                             if (!productTypeId.equals("")) {
-                                if (!date.equals("")) DefectFragment.DefectTab(productTypeId, date);
+                                if (!date.equals("")) DefectFragment.DefectTab(type1,type2, date);
                             }
                         } else if (tabPos == 2) {
                             if (!productTypeId.equals("")) {
-                                if (!date.equals("")) TimerFragment.TimerTab(productTypeId, date);
+                                if (!date.equals("")) TimerFragment.TimerTab(type1,type2, date);
                             }
                         }
 
@@ -351,6 +354,8 @@ public class DashboardAct extends AppCompatActivity {
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
                 //  listener.SelectedDate(sdf.format(myCalendar.getTime()));
                 date = sdf.format(myCalendar.getTime());
+                binding.tvDate.setText(DataManager.convertDateToString3(date));
+
                 if (NetworkAvailablity.checkNetworkStatus(context))
                     getDashBoradData(type1,type2, date);
                 else
